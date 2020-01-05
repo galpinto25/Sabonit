@@ -6,16 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class CategoriesActivity extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categories);
+        setContentView(R.layout.activity_product);
     }
 
-    public void intentLaundryDepartment(View view) {
-        Intent intent = new Intent(this, ProductActivity.class);
+    public void backToCategories(View view) {
+        Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
     }
 }
