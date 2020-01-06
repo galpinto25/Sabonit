@@ -8,45 +8,52 @@
 
     <ImageButton
         android:id="@+id/hand_soap"
-        android:layout_width="95dp"
-        android:layout_height="89dp"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="118dp"
         android:layout_marginEnd="95dp"
         android:layout_marginRight="95dp"
-        android:layout_marginTop="118dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/arrow_down_float" />
+        app:srcCompat="@drawable/handsoap_image" />
 
     <ImageButton
         android:id="@+id/laundry"
-        android:layout_width="95dp"
-        android:layout_height="89dp"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="95dp"
         android:layout_marginRight="95dp"
-        android:layout_marginTop="244dp"
+        android:background="@android:color/transparent"
         android:onClick="intentLaundryDepartment"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/arrow_down_float" />
+        app:layout_constraintTop_toBottomOf="@+id/handsoap_text"
+        app:srcCompat="@drawable/laundry_image"
+        tools:ignore="VectorDrawableCompat" />
 
     <ImageButton
         android:id="@+id/house_cleaning"
-        android:layout_width="95dp"
-        android:layout_height="89dp"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
-        android:layout_marginTop="18dp"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/laundry"
         app:layout_constraintTop_toBottomOf="@+id/facebody_text"
         app:srcCompat="@android:drawable/arrow_down_float" />
 
     <ImageButton
         android:id="@+id/face_body_wash"
-        android:layout_width="95dp"
-        android:layout_height="89dp"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="118dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
-        android:layout_marginTop="118dp"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/hand_soap"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/arrow_down_float" />
@@ -55,9 +62,10 @@
         android:id="@+id/facebody_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
         android:text="Face and Body wash"
+        app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toStartOf="@+id/handsoap_text"
         app:layout_constraintTop_toBottomOf="@+id/face_body_wash" />
 
@@ -68,6 +76,7 @@
         android:layout_marginEnd="112dp"
         android:layout_marginRight="112dp"
         android:text="Hand Soap"
+        app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hand_soap" />
 
@@ -78,6 +87,7 @@
         android:layout_marginEnd="64dp"
         android:layout_marginRight="64dp"
         android:text="House Cleaning"
+        app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toStartOf="@+id/laundry_text"
         app:layout_constraintTop_toBottomOf="@+id/house_cleaning" />
 
@@ -88,6 +98,7 @@
         android:layout_marginEnd="120dp"
         android:layout_marginRight="120dp"
         android:text="Laundry"
+        app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/laundry" />
 
