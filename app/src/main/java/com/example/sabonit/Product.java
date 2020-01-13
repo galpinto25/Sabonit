@@ -13,8 +13,6 @@ package com.example.sabonit;
  */
 public class Product
 {
-
-
     /* ********* Attributes: ********* */
     // The products are divided to categories, and every category is another department.
     String department;
