@@ -1,3 +1,4 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
 
 /**
@@ -15,13 +16,13 @@ public class Product
 {
     /* ********* Attributes: ********* */
     // The products are divided to categories, and every category is another department.
-    String department;
+    private String department;
     // The specific name of the product in the department.
-    String name;
+    private String name;
     // Price of one liter of the product, in use when computing the price of a given amount.
-    int price_per_liter;
+    private int pricePerLiter;
     // Optional, a short description or anything that not reflected in the product's department and name.
-    String description;
+    private String description;
 
 
     /* ********* Constructors: ********* */
@@ -33,16 +34,16 @@ public class Product
 
     /**
      * The constructor gets values for department and name that are primary key, as described above
-     * in the class documentation. Also it gets a factor of price_per_liter for the total price
+     * in the class documentation. Also it gets a factor of pricePerLiter for the total price
      * computation of orders.
      * @param department - a general category of the products.
      * @param name - a specific product name in the department, probably the manufacturer name.
-     * @param price_per_liter - price of one liter of the product.
+     * @param pricePerLiter - price of one liter of the product.
      */
-    public Product(String department, String name, int price_per_liter) {
+    public Product(String department, String name, int pricePerLiter) {
         this.department = department;
         this.name = name;
-        this.price_per_liter = price_per_liter;
+        this.pricePerLiter = pricePerLiter;
     }
 
 
@@ -74,11 +75,13 @@ public class Product
         this.name = name;
     }
 
-    public int getPrice_per_liter() {
-        return price_per_liter;
+    public String getFullName() { return this.department + " " + this.name; }
+
+    public int getPricePerLiter() {
+        return pricePerLiter;
     }
 
-    public void setPrice_per_liter(int price_per_liter) {
-        this.price_per_liter = price_per_liter;
+    public void setPricePerLiter(int pricePerLiter) {
+        this.pricePerLiter = pricePerLiter;
     }
 }
