@@ -2,12 +2,12 @@
 package com.example.sabonit;
 
 /**
- * todo document
+ * Orders holds all the relevant information for products orders and manages it.
  */
 public class Order
 {
     /* ********* Attributes: ********* */
-    // Product to order fromm the Sabonit.
+    // Product to order from the Sabonit.
     private Product product;
     // Amount of liters of product in the total product order.
     private double liters;
