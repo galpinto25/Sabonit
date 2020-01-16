@@ -35,9 +35,9 @@ public class Product
      * The constructor gets values for department and name that are primary key, as described above
      * in the class documentation. Also it gets a factor of price_per_liter for the total price
      * computation of orders.
-     * @param department - a general category of the products.
-     * @param name - a specific product name in the department, probably the manufacturer name.
-     * @param price_per_liter - price of one liter of the product.
+     * @param department - a general category of the products
+     * @param name - a specific product name in the department, probably the manufacturer name
+     * @param price_per_liter - price of one liter of the product
      */
     public Product(String department, String name, int price_per_liter) {
         this.department = department;
