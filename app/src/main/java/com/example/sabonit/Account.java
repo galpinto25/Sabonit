@@ -30,7 +30,7 @@ public class Account
     // User's cart, empty when initialized
     private Cart cart;
     // User's history, empty when initialized
-    private History history;
+//    private History history;
 
 
     /* ********* Constructors: ********* */
@@ -51,7 +51,7 @@ public class Account
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.cart = new Cart();
-        this.history = new History();
+//        this.history = new History();
     }
 
     /* ********* Getters & Setters: ********* */
@@ -84,9 +84,9 @@ public class Account
         return cart;
     }
 
-    public History getHistory() {
-        return history;
-    }
+//    public History getHistory() {
+//        return history;
+//    }
 }
 
 /* // todo - move the next code to the appropriate activity: responsible of extracting relevant data
