@@ -65,7 +65,7 @@ public class CategoriesActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult()))
                             {
                                 Log.d("product from query", document.getId() + " => " + document.getData());
-                                requestedProduct = document.toObject(Product.class);
+//                                requestedProduct = document.toObject(Product.class);
                             }
                         } else {
                             Log.d("", "Error getting documents: ", task.getException());

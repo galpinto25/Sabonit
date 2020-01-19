@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "11024369919",
+    "firebase_url": "https://sabonit-2478c.firebaseio.com",
+    "project_id": "sabonit-2478c",
+    "storage_bucket": "sabonit-2478c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11024369919:android:69a172bf2135d2597224ca",
+        "android_client_info": {
+          "package_name": "com.example.sabonit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11024369919-tdg2pqkb71fh5mqpsv6cb9in9pk0hr74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD28-K6Ok_vfKUJ4HzU66w_D3XsIMClP2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11024369919-tdg2pqkb71fh5mqpsv6cb9in9pk0hr74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
