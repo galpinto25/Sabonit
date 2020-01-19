@@ -31,4 +31,5 @@ public class ProductActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
     }
+
 }

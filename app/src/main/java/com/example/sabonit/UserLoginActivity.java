@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,16 +22,25 @@ import java.util.List;
 public class UserLoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
+    private boolean loginState = false;
     TextView helloTitle;
     ImageView profileImage;
+    Button continueLogin;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login);
         helloTitle = findViewById(R.id.hello_text);
         profileImage = findViewById(R.id.profile_image);
-        createSignInIntent();
+        continueLogin = findViewById(R.id.continue_or_login);
+        continueLogin.setText("Continue");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null)
+        {
+            createSignInIntent();
+        }
     }
 
     public void createSignInIntent() {
@@ -81,9 +90,42 @@ public class UserLoginActivity extends AppCompatActivity {
         }
     }
 
-    public void continueToCategoriesActivity(View view) {
-        Intent intent = new Intent(this, CategoriesActivity.class);
-        startActivity(intent);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+        {
+            if (bundle.getInt("Logout") == 0) {
+                getIntent().removeExtra("Logout");
+                logOut();
+            }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void LogIn() {
+        createSignInIntent();
+        continueLogin.setText("Continue");
+        loginState = false;
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void logOut() {
+        FirebaseAuth.getInstance().signOut();
+        helloTitle.setText("You have been logged out");
+        continueLogin.setText("Log In");
+        loginState = true;
+        profileImage.setImageResource(R.drawable.ic_guest_user);
+    }
+
+    public void continueOrLogin(View view) {
+        if (loginState) {
+            LogIn();
+        } else {
+            Intent intent = new Intent(this, CategoriesActivity.class);
+            startActivity(intent);
+        }
     }
 
 }
