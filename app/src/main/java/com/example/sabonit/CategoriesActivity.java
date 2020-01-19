@@ -1,6 +1,5 @@
 package com.example.sabonit;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,19 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class CategoriesActivity extends AppCompatActivity {
@@ -39,8 +32,24 @@ public class CategoriesActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
     }
 
-    public void intentLaundryDepartment(View view) {
+    public void intentDepartment(View view) {
         Intent intent = new Intent(this, ProductActivity.class);
+        switch (view.getId()) {
+            case R.id.face_body_wash:
+                intent.putExtra("Department", "Face & Body Wash\n");
+                break;
+            case R.id.hand_soap:
+                intent.putExtra("Department", "Hand Soap ");
+                break;
+            case R.id.house_cleaning:
+                intent.putExtra("Department", "House Cleaning ");
+                break;
+            case R.id.laundry:
+                intent.putExtra("Department", "Laundry ");
+                break;
+            default:
+                break;
+        }
         startActivity(intent);
     }
 
