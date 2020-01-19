@@ -23,7 +23,7 @@ public class Order
     /**
      *  Creates an order of the specified product in the given amount.
      * @param product - type of product to order
-     * @param liters - amount of product to order (in liters)
+     * @param liters - amount of product to order (in shekels to liter)
      */
     public Order(Product product, double liters) {
         this.product = product;
