@@ -22,15 +22,15 @@ public class Account
 
     /* ********* Attributes: ********* */
     // Given as an address
-    String location;
+    private String location;
     // User's name, may can be extracted from the google acount
-    String name;
+    private String name;
     // User's phone number, may can be extracted from the google acount
-    String phoneNumber;
+    private String phoneNumber;
     // User's cart, empty when initialized
-    Cart cart;
+    private Cart cart;
     // User's history, empty when initialized
-    History history;
+    private History history;
 
 
     /* ********* Constructors: ********* */
