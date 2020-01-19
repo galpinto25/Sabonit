@@ -21,7 +21,7 @@ public class Account
 
 
     /* ********* Attributes: ********* */
-    // Given as an address
+    // Given as an address in the next pattern: street and building number, city ("Ramban 30, Jerusalem")
     private String location;
     // User's name, may can be extracted from the google acount
     private String name;
