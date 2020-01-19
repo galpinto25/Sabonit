@@ -25,7 +25,7 @@ public class EntryActivity extends AppCompatActivity
             @Override
             public void run() {
                 // Create an Intent that will start the order-types Activity
-                Intent intent = new Intent(EntryActivity.this, CategoriesActivity.class);
+                Intent intent = new Intent(EntryActivity.this, UserLoginActivity.class);
                 startActivity(intent);
                 finish();
             }
