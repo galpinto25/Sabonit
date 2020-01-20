@@ -42,7 +42,7 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-        departmentTitle = findViewById(R.id.department_name);
+        departmentTitle = findViewById(R.id.cart_title);
         productName = findViewById(R.id.product_name);
         productDescription = findViewById(R.id.description);
         productImage = findViewById(R.id.product_image);
@@ -107,4 +107,8 @@ public class ProductActivity extends AppCompatActivity {
                 });
     }
 
+    public void goToCart(View view) {
+        Intent intent = new Intent(this, CartActivity.class);
+        startActivity(intent);
+    }
 }
