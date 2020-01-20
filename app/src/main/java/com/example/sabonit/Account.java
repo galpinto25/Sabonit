@@ -29,6 +29,7 @@ public class Account
     private String phoneNumber;
     // User's cart, empty when initialized
     private Cart cart;
+
     // User's history, empty when initialized
 //    private History history;
 
@@ -84,10 +85,10 @@ public class Account
         return cart;
     }
 
-    public void setCart(Cart cart)
-    {
+    public void setCart(Cart cart) {
         this.cart = cart;
     }
+
 
 //    public History getHistory() {
 //        return history;

@@ -1,10 +1,12 @@
 package com.example.sabonit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,8 +14,12 @@ import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
@@ -25,9 +31,12 @@ public class UserLoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private boolean loginState = false;
     private FirebaseFirestore db;
+    private boolean isAccountExist;
     TextView helloTitle;
     ImageView profileImage;
     Button continueLogin;
+    String name;
+    String uid;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -40,6 +49,7 @@ public class UserLoginActivity extends AppCompatActivity {
         continueLogin.setText("Continue");
         Bundle bundle = getIntent().getExtras();
         db = FirebaseFirestore.getInstance();
+        isAccountExist = false;
         if (bundle == null)
         {
             createSignInIntent();
@@ -73,16 +83,20 @@ public class UserLoginActivity extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     // Name, email address, and profile photo Url
-                    String name = user.getDisplayName();
+                    name = user.getDisplayName();
                     String email = user.getEmail();
                     Picasso.get().load(user.getPhotoUrl()).into(profileImage);
                     // Check if user's email is verified
                     // The user's ID, unique to the Firebase project. Do NOT use this value to
                     // authenticate with your backend server, if you have one. Use
                     // FirebaseUser.getIdToken() instead.
-                    String uid = user.getUid();
-                    Account accountToAdd = new Account("abc", name, "0501234567");
-                    db.collection("Accounts").document(uid).set(accountToAdd);
+                    uid = user.getUid();
+                    updateAccount();
+//                    if (! isAccountExist)
+//                    {
+//                        Account accountToAdd = new Account("abc", name, "0501234567");
+//                        db.collection("Accounts").document(uid).set(accountToAdd);
+//                    }
                     helloTitle.setText("Welcome, " + name + "!");
                 }
                 // ...
@@ -94,6 +108,33 @@ public class UserLoginActivity extends AppCompatActivity {
                 // ...
             }
         }
+    }
+
+    private void updateAccount()
+    {
+        DocumentReference accountsRef = db.collection("Accounts").document(uid);
+        accountsRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("SearchAccountIdSucess", "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        Log.d("SearchAccountIdFailed", "No such document");
+                        writeNewAccount();
+                    }
+                } else {
+                    Log.d("SearchInTheDBFailed", "get failed with ", task.getException());
+                }
+            }
+        });
+    }
+
+    private void writeNewAccount()
+    {
+        Account accountToAdd = new Account("ghi", name, "0501234567");
+        db.collection("Accounts").document(uid).set(accountToAdd);
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.ArrayList;
  */
 public class Cart
 {
+
     /* ********* Attributes: ********* */
     // This list holds all the orders which did not got to the consumer.
     private ArrayList<Order> ordersList;
@@ -70,5 +71,13 @@ public class Cart
     private Order popOrderFromCart(int orderIndex)
     {
         return this.ordersList.remove(orderIndex);
+    }
+
+    public ArrayList<Order> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(ArrayList<Order> ordersList) {
+        this.ordersList = ordersList;
     }
 }
