@@ -28,7 +28,7 @@ public class Account
     // User's phone number, may can be extracted from the google acount
     private String phoneNumber;
     // User's cart, empty when initialized
-//    private Cart cart;
+    private Cart cart;
     // User's history, empty when initialized
 //    private History history;
 
@@ -50,7 +50,7 @@ public class Account
         this.location = location;
         this.name = name;
         this.phoneNumber = phoneNumber;
-//        this.cart = new Cart();
+        this.cart = new Cart();
 //        this.history = new History();
     }
 
@@ -80,9 +80,14 @@ public class Account
         this.phoneNumber = phoneNumber;
     }
 
-//    public Cart getCart() {
-//        return cart;
-//    }
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart)
+    {
+        this.cart = cart;
+    }
 
 //    public History getHistory() {
 //        return history;
