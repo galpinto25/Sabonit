@@ -95,6 +95,7 @@
             android:id="@+id/logout"
             android:layout_width="45dp"
             android:layout_height="50dp"
+            android:onClick="logout"
             app:srcCompat="@drawable/ic_logout"
             tools:layout_editor_absoluteX="340dp"
             tools:layout_editor_absoluteY="21dp" />

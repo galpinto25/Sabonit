@@ -32,4 +32,9 @@ public class ProductActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void logout(View view) {
+        Intent intent = new Intent(this, UserLoginActivity.class);
+        intent.putExtra("Logout", 0);
+        startActivity(intent);
+    }
 }
