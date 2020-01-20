@@ -20,6 +20,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         departmentTitle = findViewById(R.id.department_name);
         Bundle bundle = getIntent().getExtras();
+
         if (bundle != null)
         {
             department = bundle.getString("Department");
