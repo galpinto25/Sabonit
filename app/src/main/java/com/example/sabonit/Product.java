@@ -23,6 +23,7 @@ public class Product
     private int pricePerLiter;
     // Optional, a short description or anything that not reflected in the product's department and name.
     private String description;
+    private String imageUrl;
 
 
     /* ********* Constructors: ********* */
@@ -40,10 +41,11 @@ public class Product
      * @param name - a specific product name in the department, probably the manufacturer name.
      * @param pricePerLiter - price of one liter of the product.
      */
-    public Product(String department, String name, int pricePerLiter) {
+    public Product(String department, String name, int pricePerLiter, String imageUrl) {
         this.department = department;
         this.name = name;
         this.pricePerLiter = pricePerLiter;
+        this.imageUrl = imageUrl;
     }
 
 
@@ -83,5 +85,13 @@ public class Product
 
     public void setPricePerLiter(int pricePerLiter) {
         this.pricePerLiter = pricePerLiter;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
