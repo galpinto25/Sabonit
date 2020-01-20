@@ -14,6 +14,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
@@ -23,6 +24,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
     private boolean loginState = false;
+    private FirebaseFirestore db;
     TextView helloTitle;
     ImageView profileImage;
     Button continueLogin;
@@ -37,6 +39,7 @@ public class UserLoginActivity extends AppCompatActivity {
         continueLogin = findViewById(R.id.continue_or_login);
         continueLogin.setText("Continue");
         Bundle bundle = getIntent().getExtras();
+        db = FirebaseFirestore.getInstance();
         if (bundle == null)
         {
             createSignInIntent();
@@ -78,6 +81,8 @@ public class UserLoginActivity extends AppCompatActivity {
                     // authenticate with your backend server, if you have one. Use
                     // FirebaseUser.getIdToken() instead.
                     String uid = user.getUid();
+                    Account accountToAdd = new Account("abc", name, "0501234567");
+                    db.collection("Accounts").document(uid).set(accountToAdd);
                     helloTitle.setText("Welcome, " + name + "!");
                 }
                 // ...
