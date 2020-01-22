@@ -11,10 +11,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -31,11 +33,14 @@ public class ProductActivity extends AppCompatActivity {
     TextView departmentTitle;
     TextView productName;
     TextView productDescription;
+    TextView litersTitle;
     ImageView productImage;
     String department;
     //this is our db that contains all the information of the app
     private FirebaseFirestore db;
     private ArrayList<Product> products;
+    private int currentProductIndex;
+    private double currentProductLiters;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -45,7 +50,9 @@ public class ProductActivity extends AppCompatActivity {
         departmentTitle = findViewById(R.id.cart_title);
         productName = findViewById(R.id.product_name);
         productDescription = findViewById(R.id.description);
+        litersTitle = findViewById(R.id.liters);
         productImage = findViewById(R.id.product_image);
+        SeekBar literSeekBar = findViewById(R.id.liter_seek_bar);
         Bundle bundle = getIntent().getExtras();
         db = FirebaseFirestore.getInstance();
         products = new ArrayList<>();
@@ -56,6 +63,27 @@ public class ProductActivity extends AppCompatActivity {
         }
         String dep = department.replace(" ", "").replace("\n", "");
         updateProductsByDepartmentName(dep);
+
+        literSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // TODO Auto-generated method stub
+                double numLiters = progress / 10.0;
+                litersTitle.setText(String.valueOf(numLiters) + "L");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+                currentProductLiters = seekBar.getProgress() / 10.0;
+            }
+        });
     }
 
     private void showRandomOnScreen() {
@@ -64,6 +92,7 @@ public class ProductActivity extends AppCompatActivity {
         productName.setText(products.get(indexOfProduct).getFullName());
         productDescription.setText(products.get(indexOfProduct).getDescription());
         Picasso.get().load(products.get(indexOfProduct).getImageUrl()).into(productImage);
+        currentProductIndex = indexOfProduct;
     }
 
     public void backToCategories(View view) {
@@ -111,4 +140,16 @@ public class ProductActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
     }
+
+    public void addProductToCart(View view) {
+        Account account = Account.getCurrentAccount();
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        account.getCart().addProductToCart(products.get(currentProductIndex), currentProductLiters);
+        db.collection("Accounts").document(uid).update("cart", account.getCart());
+    }
+
+    // todo needs to be implemented
+    public void setSeekBar(double liters) {
+    }
+
 }
