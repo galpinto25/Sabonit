@@ -31,7 +31,7 @@ public class CartActivity extends AppCompatActivity {
                     append(product.getPricePerLiter() * order.getLiters()).append("NIS\n");
         }
         if (ordersDescription.length() == 0) {
-            ordersDescription = new StringBuilder("Your cart is\n empty...\uD83D\uDE44");
+            ordersDescription = new StringBuilder("Your cart is\n empty...\n\uD83D\uDE44");
         }
         cartDescription.setText(ordersDescription);
     }
