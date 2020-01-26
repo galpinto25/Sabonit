@@ -3,9 +3,12 @@ package com.example.sabonit;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -73,6 +76,7 @@ public class ProductActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 double numLiters = progress / 10.0;
                 litersTitle.setText(String.valueOf(numLiters) + "L");
+                fillBottle(numLiters, R.style.ColorRoses);
             }
 
             @Override
@@ -87,6 +91,44 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
         literSeekBar.setProgress(initalProgress);
+    }
+
+    private void fillBottle(double numLiters, int color) {
+        final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, color);
+        if (numLiters < 0.3) {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_empty, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        } else if (numLiters < 1) {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_1, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        } else if (numLiters < 2) {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_2, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        } else if (numLiters < 3) {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_3, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        } else if (numLiters < 4) {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_4, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        } else if (numLiters < 5) {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_5, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        } else if (numLiters < 6) {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_6, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        } else if (numLiters < 7) {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_7, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        } else if (numLiters < 8) {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_8, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        } else if (numLiters < 9) {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_9, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        } else {
+            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_10, wrapper.getTheme());
+            productImage.setImageDrawable(drawable);
+        }
     }
 
     /**
@@ -113,7 +155,7 @@ public class ProductActivity extends AppCompatActivity {
         int indexOfProduct = r.nextInt(products.size());
         productName.setText(products.get(indexOfProduct).getFullName());
         productDescription.setText(products.get(indexOfProduct).getDescription());
-        Picasso.get().load(products.get(indexOfProduct).getImageUrl()).into(productImage);
+//        Picasso.get().load(products.get(indexOfProduct).getImageUrl()).into(productImage);
         currentProductIndex = indexOfProduct;
     }
 
