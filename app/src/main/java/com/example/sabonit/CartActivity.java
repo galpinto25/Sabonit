@@ -1,14 +1,10 @@
 package com.example.sabonit;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.Objects;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -33,6 +29,9 @@ public class CartActivity extends AppCompatActivity {
             Product product = order.getProduct();
             ordersDescription.append(product.getFullName()).append(" - ").
                     append(product.getPricePerLiter() * order.getLiters()).append("NIS\n");
+        }
+        if (ordersDescription.length() == 0) {
+            ordersDescription = new StringBuilder("Your cart is\n empty...\uD83D\uDE44");
         }
         cartDescription.setText(ordersDescription);
     }

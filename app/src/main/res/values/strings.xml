@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Sabonit</string>
+    <string name="emoji">&#x1F644;</string>
 </resources>
