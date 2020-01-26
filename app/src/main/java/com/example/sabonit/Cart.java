@@ -49,19 +49,22 @@ public class Cart
     }
 
     /**
-     * Adds the amount of liters of the specified product to the orders list. If there is an order
-     * of this product already, adds the amount of the liters to the current amount in this order.
+     * Adds the amount of litersTitle of the specified product to the orders list. If there is an order
+     * of this product already, adds the amount of the litersTitle to the current amount in this order.
      * @param product - product to add to the orders list
-     * @param liters - the amount to order from the product (in liters)
+     * @param liters - the amount to order from the product (in litersTitle)
      */
     public void addProductToCart(Product product, double liters)
     {
         int index = findProductIndex(product.getFullName());
         if (index >= 0) {
-            double newAmount = ordersList.get(index).addLiters(liters);
+            double newAmount = ordersList.get(index).setLiters(liters);
             if (newAmount == 0) popOrderFromCart(index);
         }
-        else this.ordersList.add(new Order(product, liters));
+        else if (liters > 0)
+        {
+            this.ordersList.add(new Order(product, liters));
+        }
     }
 
     /**

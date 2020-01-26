@@ -2,6 +2,7 @@ package com.example.sabonit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -120,6 +121,7 @@ public class UserLoginActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d("SearchAccountIdSucess", "DocumentSnapshot data: " + document.getData());
+                        setAccountData(document);
                     } else {
                         Log.d("SearchAccountIdFailed", "No such document");
                         writeNewAccount();
@@ -129,6 +131,11 @@ public class UserLoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setAccountData(DocumentSnapshot document) {
+        Account currentAccount = document.toObject(Account.class);
+        Account.setCurrentAccount(currentAccount);
     }
 
     private void writeNewAccount()
@@ -173,6 +180,16 @@ public class UserLoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CategoriesActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void showHowItWorksDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        HowItWorksDialogFragment howItWorksDialogFragment = HowItWorksDialogFragment.newInstance();
+        howItWorksDialogFragment.show(fm, "how_it_works");
+    }
+
+    public void popHowItWorks(View view) {
+        showHowItWorksDialog();
     }
 
 }

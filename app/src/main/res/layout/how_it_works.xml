@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="400dp"
+    android:layout_height="600dp"
+    android:gravity="center|center_vertical"
+    android:orientation="vertical"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp">
+
+    <TextView
+        android:id="@+id/about_title"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:fontFamily="@font/assistant_light"
+        android:gravity="center"
+        android:text="About Sabonit"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/how_sabonit_works"
+        android:layout_width="360dp"
+        android:layout_height="350dp"
+        android:fontFamily="@font/assistant"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Sabonit is an app which helps you help the environment by refilling
+your cleaning materials or your other home necessary bottle products.\n\nYou simply need
+to order your about-to-finish products, and we'll come and refill them for you!\nWithout the
+need to buy a new bottle.\n\nDid we mention already how simple is Sabonit?"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/gif_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+
+</LinearLayout>

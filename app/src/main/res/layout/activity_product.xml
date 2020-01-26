@@ -112,7 +112,35 @@
         android:background="@android:color/background_light"
         android:fontFamily="@font/assistant"
         android:text="add to my cart"
+        android:onClick="addProductToCart"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <SeekBar
+        android:id="@+id/liter_seek_bar"
+        android:layout_width="319dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="64dp"
+        android:max="100"
+        android:maxHeight="6dp"
+        android:minHeight="10dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/seek_bar"
+        app:layout_constraintBottom_toTopOf="@+id/add_to_my_cart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/liters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/assistant_light"
+        android:text="0.0L"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/liter_seek_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

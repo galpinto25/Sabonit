@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -99,6 +100,16 @@ public class CategoriesActivity extends AppCompatActivity {
     public void goToCart(View view) {
         Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
+    }
+
+    private void showHowItWorksDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        HowItWorksDialogFragment howItWorksDialogFragment = HowItWorksDialogFragment.newInstance();
+        howItWorksDialogFragment.show(fm, "how_it_works");
+    }
+
+    public void popHowItWorks(View view) {
+        showHowItWorksDialog();
     }
 
 }

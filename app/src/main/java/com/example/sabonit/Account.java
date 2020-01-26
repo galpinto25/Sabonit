@@ -29,6 +29,8 @@ public class Account
     private String phoneNumber;
     // User's cart, empty when initialized
     private Cart cart;
+    // The account of the user that is logged in
+    private static Account currentAccount;
 
     // User's history, empty when initialized
 //    private History history;
@@ -42,7 +44,7 @@ public class Account
     }
 
     /**
-     * When signing up, the account is initialized for the user's sata handling.
+     * When signing up, the account is initialized for the user's data handling.
      * @param location - the address that the Sabonit get in the order.
      * @param name - user's name.
      * @param phoneNumber - user's phone number.
@@ -52,10 +54,19 @@ public class Account
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.cart = new Cart();
+        currentAccount = this;
 //        this.history = new History();
     }
 
     /* ********* Getters & Setters: ********* */
+
+    public static Account getCurrentAccount() {
+        return currentAccount;
+    }
+
+    public static void setCurrentAccount(Account currentAccount) {
+        Account.currentAccount = currentAccount;
+    }
 
     public String getLocation() {
         return location;
