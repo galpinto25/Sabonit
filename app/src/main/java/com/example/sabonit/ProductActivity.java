@@ -41,6 +41,8 @@ public class ProductActivity extends AppCompatActivity {
     private ArrayList<Product> products;
     private int currentProductIndex;
     private double currentProductLiters;
+    private int initalProgress;
+    private SeekBar literSeekBar;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -52,10 +54,11 @@ public class ProductActivity extends AppCompatActivity {
         productDescription = findViewById(R.id.description);
         litersTitle = findViewById(R.id.liters);
         productImage = findViewById(R.id.product_image);
-        SeekBar literSeekBar = findViewById(R.id.liter_seek_bar);
+        literSeekBar = findViewById(R.id.liter_seek_bar);
         Bundle bundle = getIntent().getExtras();
         db = FirebaseFirestore.getInstance();
         products = new ArrayList<>();
+        initalProgress = 0;
         if (bundle != null)
         {
             department = bundle.getString("Department");
@@ -63,7 +66,6 @@ public class ProductActivity extends AppCompatActivity {
         }
         String dep = department.replace(" ", "").replace("\n", "");
         updateProductsByDepartmentName(dep);
-
         literSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
 
             @Override
@@ -84,6 +86,26 @@ public class ProductActivity extends AppCompatActivity {
                 currentProductLiters = seekBar.getProgress() / 10.0;
             }
         });
+        literSeekBar.setProgress(initalProgress);
+    }
+
+    /**
+     * update the initial ammount of liter to be whats written in the db
+     */
+    private void updateInitialProgress()
+    {
+        Account currentAccount = Account.getCurrentAccount();
+        Cart currentCart = currentAccount.getCart();
+        for (Order currentOrder:currentCart.getOrdersList())
+        {
+            if (currentOrder.getProduct().getFullName().equals(products.get(currentProductIndex).getFullName()))
+            {
+                initalProgress = (int) (currentOrder.getLiters() * 10.0);
+                break;
+            }
+
+        }
+        literSeekBar.setProgress(initalProgress);
     }
 
     private void showRandomOnScreen() {
@@ -131,6 +153,7 @@ public class ProductActivity extends AppCompatActivity {
                         } else {
                             Log.d("", "Error getting documents: ", task.getException());
                         }
+                        updateInitialProgress();
                     }
 
                 });
