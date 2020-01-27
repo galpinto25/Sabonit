@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ColorRoses">
+        <item name="bottle_color">@color/roses</item>
+    </style>
+
+    <style name="ColorAqua">
+        <item name="bottle_color">@color/aqua</item>
+    </style>
+
 </resources>
