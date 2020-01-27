@@ -9,5 +9,9 @@
     <string name="description">description</string>
     <string name="name">name</string>
     <string name="laundry_department">Laundry Department</string>
-    <string name="laundry_department">Laundry Department</string>
+    <string name="laundry">Laundry</string>
+    <string name="face_amp_body_wash"><![CDATA[Face & Body Wash]]></string>
+    <string name="hand_soap">Hand Soap</string>
+    <string name="dishwashing_liquid">Dishwashing Liquid</string>
+    <string name="house_cleaning">House Cleaning</string>
 </resources>
