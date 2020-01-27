@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -32,6 +33,8 @@ import java.util.Random;
 import com.squareup.picasso.Picasso;
 
 public class ProductActivity extends AppCompatActivity {
+
+    private final int NEW_BOTTLE = -1;
 
     TextView departmentTitle;
     TextView productName;
@@ -196,9 +199,18 @@ public class ProductActivity extends AppCompatActivity {
                             Log.d("", "Error getting documents: ", task.getException());
                         }
                         updateInitialProgress();
+                        updateCheckBoxNewBottle();
                     }
 
                 });
+    }
+
+    private void updateCheckBoxNewBottle() {
+        if (products.get(currentProductIndex).isNewBottle())
+        {
+            CheckBox checkBox = findViewById(R.id.checkbox_newBottle);
+            checkBox.setChecked(true);
+        }
     }
 
     public void goToCart(View view) {
@@ -213,8 +225,23 @@ public class ProductActivity extends AppCompatActivity {
         db.collection("Accounts").document(uid).update("cart", account.getCart());
     }
 
-    // todo needs to be implemented
-    public void setSeekBar(double liters) {
+    public void onCheckboxClicked(View view)
+    {
+        boolean checked = ((CheckBox) view).isChecked();
+        Product currentProduct = products.get(currentProductIndex);
+        currentProduct.setNewBottle(checked);
+        if (checked)
+        {
+            literSeekBar.setVisibility(View.INVISIBLE);
+            litersTitle.setVisibility(View.INVISIBLE);
+            currentProductLiters = NEW_BOTTLE;
+        }
+        else
+        {
+            literSeekBar.setVisibility(View.VISIBLE);
+            litersTitle.setVisibility(View.VISIBLE);
+            currentProductLiters = 0;
+        }
     }
 
 }
