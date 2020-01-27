@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="124dp"
         android:gravity="clip_vertical|center_horizontal"
-        android:text="Laundry Department"
+        android:text="@string/laundry_department"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         app:fontFamily="@font/assistant"
@@ -46,9 +46,8 @@
         android:id="@+id/product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:fontFamily="@font/assistant"
-        android:text="name"
+        android:text="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/product_image" />
@@ -57,9 +56,9 @@
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/assistant"
-        android:text="description"
+        android:text="@string/description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/product_name" />
@@ -110,7 +109,7 @@
         android:layout_marginBottom="32dp"
         android:background="@android:color/background_light"
         android:fontFamily="@font/assistant"
-        android:text="add to my cart"
+        android:text="@string/add_to_my_cart"
         android:onClick="addProductToCart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,13 +133,58 @@
         android:id="@+id/liters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/assistant_light"
-        android:text="0.0L"
+        android:text="@string/_0_0l"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/liter_seek_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/scent_options"
+        android:layout_width="300dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/liters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/roses"
+            android:checked="true"
+            android:fontFamily="@font/assistant_light"
+            android:text="@string/roses"
+            android:textColor="@color/roses"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/aqua"
+            android:fontFamily="@font/assistant_light"
+            android:text="@string/aqua"
+            android:textColor="@color/aqua"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/apple"
+            android:fontFamily="@font/assistant_light"
+            android:text="@string/apple"
+            android:textColor="@color/apple"
+            android:textStyle="bold" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

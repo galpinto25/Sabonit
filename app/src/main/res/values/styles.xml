@@ -16,4 +16,8 @@
         <item name="bottle_color">@color/aqua</item>
     </style>
 
+    <style name="ColorApple">
+        <item name="bottle_color">@color/apple</item>
+    </style>
+
 </resources>
