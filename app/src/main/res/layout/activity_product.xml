@@ -120,7 +120,7 @@
         android:id="@+id/liter_seek_bar"
         android:layout_width="319dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="32dp"
         android:max="100"
         android:maxHeight="6dp"
         android:minHeight="10dp"

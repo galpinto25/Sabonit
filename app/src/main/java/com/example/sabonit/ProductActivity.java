@@ -93,36 +93,36 @@ public class ProductActivity extends AppCompatActivity {
         literSeekBar.setProgress(initalProgress);
     }
 
-    private void fillBottle(double numLiters, int color) {
+    private void fillBottle(double curLitersInSeekBar, int color) {
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, color);
-        if (numLiters < 0.3) {
+        if (curLitersInSeekBar < 0.3) {
             final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_empty, wrapper.getTheme());
             productImage.setImageDrawable(drawable);
-        } else if (numLiters < 1) {
+        } else if (curLitersInSeekBar < 1) {
             final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_1, wrapper.getTheme());
             productImage.setImageDrawable(drawable);
-        } else if (numLiters < 2) {
+        } else if (curLitersInSeekBar < 2) {
             final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_2, wrapper.getTheme());
             productImage.setImageDrawable(drawable);
-        } else if (numLiters < 3) {
+        } else if (curLitersInSeekBar < 3) {
             final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_3, wrapper.getTheme());
             productImage.setImageDrawable(drawable);
-        } else if (numLiters < 4) {
+        } else if (curLitersInSeekBar < 4) {
             final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_4, wrapper.getTheme());
             productImage.setImageDrawable(drawable);
-        } else if (numLiters < 5) {
+        } else if (curLitersInSeekBar < 5) {
             final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_5, wrapper.getTheme());
             productImage.setImageDrawable(drawable);
-        } else if (numLiters < 6) {
+        } else if (curLitersInSeekBar < 6) {
             final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_6, wrapper.getTheme());
             productImage.setImageDrawable(drawable);
-        } else if (numLiters < 7) {
+        } else if (curLitersInSeekBar < 7) {
             final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_7, wrapper.getTheme());
             productImage.setImageDrawable(drawable);
-        } else if (numLiters < 8) {
+        } else if (curLitersInSeekBar < 8) {
             final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_8, wrapper.getTheme());
             productImage.setImageDrawable(drawable);
-        } else if (numLiters < 9) {
+        } else if (curLitersInSeekBar < 9) {
             final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_9, wrapper.getTheme());
             productImage.setImageDrawable(drawable);
         } else {
