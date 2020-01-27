@@ -15,8 +15,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -49,6 +51,9 @@ public class ProductActivity extends AppCompatActivity {
     private double currentProductLiters;
     private int initalProgress;
     private SeekBar literSeekBar;
+    private RadioGroup radioScentGroup;
+    private int bottleColor = R.style.ColorRoses;
+    private double oldLitters = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -61,6 +66,13 @@ public class ProductActivity extends AppCompatActivity {
         litersTitle = findViewById(R.id.liters);
         productImage = findViewById(R.id.product_image);
         literSeekBar = findViewById(R.id.liter_seek_bar);
+        radioScentGroup = findViewById(R.id.scent_options);
+        radioScentGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                changeScent();
+            }
+        });
         Bundle bundle = getIntent().getExtras();
         db = FirebaseFirestore.getInstance();
         products = new ArrayList<>();
@@ -79,7 +91,7 @@ public class ProductActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 double numLiters = progress / 10.0;
                 litersTitle.setText(String.valueOf(numLiters) + "L");
-                fillBottle(numLiters, R.style.ColorRoses);
+                fillBottle(numLiters, bottleColor);
             }
 
             @Override
@@ -234,14 +246,33 @@ public class ProductActivity extends AppCompatActivity {
         {
             literSeekBar.setVisibility(View.INVISIBLE);
             litersTitle.setVisibility(View.INVISIBLE);
+            oldLitters = currentProductLiters;
             currentProductLiters = NEW_BOTTLE;
         }
         else
         {
             literSeekBar.setVisibility(View.VISIBLE);
             litersTitle.setVisibility(View.VISIBLE);
-            currentProductLiters = 0;
+            currentProductLiters = oldLitters;
         }
+    }
+
+    public void changeScent() {
+        // get selected radio button from radioGroup
+        int selectedId = radioScentGroup.getCheckedRadioButtonId();
+        Product currentProduct = products.get(currentProductIndex);
+        switch (selectedId) {
+            case R.id.radioButton1:
+                bottleColor = R.style.ColorRoses;
+                break;
+            case R.id.radioButton2:
+                bottleColor = R.style.ColorAqua;
+                break;
+            case R.id.radioButton3:
+                bottleColor = R.style.ColorApple;
+                break;
+        }
+        fillBottle(currentProductLiters, bottleColor);
     }
 
 }

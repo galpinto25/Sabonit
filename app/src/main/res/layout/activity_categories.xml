@@ -102,69 +102,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <ImageButton
-                android:id="@+id/house_cleaning"
-                android:layout_width="match_parent"
-                android:layout_height="152dp"
-                android:layout_marginTop="0dp"
-                android:background="@android:color/transparent"
-                android:onClick="intentDepartment"
-                android:scaleType="fitXY"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:srcCompat="@drawable/ic_house_clean" />
-
-            <TextView
-                android:id="@+id/house_cleaning_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="House Cleaning"
-                android:textSize="18sp"
-                app:fontFamily="@font/assistant"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/house_cleaning" />
-
-            <ImageButton
-                android:id="@+id/face_body_wash"
-                android:layout_width="match_parent"
-                android:layout_height="152dp"
-                android:layout_marginTop="30dp"
-                android:background="@android:color/transparent"
-                android:onClick="intentDepartment"
-                android:scaleType="fitXY"
-                app:layout_constraintStart_toStartOf="parent"
-
-                app:layout_constraintTop_toBottomOf="@+id/house_cleaning_text"
-                app:srcCompat="@drawable/ic_face_body_wash" />
-
-            <TextView
-                android:id="@+id/facebody_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="Face &amp; Body Wash"
-                android:textSize="18sp"
-                app:fontFamily="@font/assistant"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/face_body_wash" />
-
             <ImageButton
                 android:id="@+id/laundry"
                 android:layout_width="match_parent"
                 android:layout_height="175dp"
                 android:layout_marginTop="30dp"
-
                 android:background="@android:color/transparent"
                 android:onClick="intentDepartment"
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/facebody_text"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/laundry_image"
                 tools:ignore="VectorDrawableCompat" />
 
@@ -174,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Laundry"
+                android:text="@string/laundry"
                 android:textSize="18sp"
                 app:fontFamily="@font/assistant"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +132,6 @@
                 android:id="@+id/hand_soap"
                 android:layout_width="match_parent"
                 android:layout_height="152dp"
-
                 android:layout_marginTop="30dp"
                 android:background="@android:color/transparent"
                 android:onClick="intentDepartment"
@@ -200,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Hand Soap"
+                android:text="@string/hand_soap"
                 android:textSize="18sp"
                 app:fontFamily="@font/assistant"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -211,13 +157,13 @@
                 android:id="@+id/dishwashing_liquid"
                 android:layout_width="match_parent"
                 android:layout_height="152dp"
-
                 android:layout_marginTop="30dp"
                 android:background="@android:color/transparent"
+                android:clickable="false"
                 android:onClick="intentDepartment"
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/laundry_text"
+                app:layout_constraintTop_toBottomOf="@+id/handsoap_text"
                 app:srcCompat="@drawable/ic_dish_soap" />
 
             <TextView
@@ -227,12 +173,66 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
-                android:text="Dishwashing Liquid"
+                android:text="@string/dishwashing_liquid"
                 android:textSize="18sp"
                 app:fontFamily="@font/assistant"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hand_soap" />
+                app:layout_constraintTop_toBottomOf="@+id/dishwashing_liquid" />
+
+
+            <ImageButton
+                android:id="@+id/face_body_wash"
+                android:layout_width="match_parent"
+                android:layout_height="152dp"
+                android:layout_marginTop="30dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:onClick="intentDepartment"
+                android:scaleType="fitXY"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dishwashing_liquid_text"
+                app:srcCompat="@drawable/ic_face_body_wash" />
+
+            <TextView
+                android:id="@+id/facebody_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/face_amp_body_wash"
+                android:textSize="18sp"
+                app:fontFamily="@font/assistant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/face_body_wash" />
+
+            <ImageButton
+                android:id="@+id/house_cleaning"
+                android:layout_width="match_parent"
+                android:layout_height="152dp"
+                android:layout_marginTop="0dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:onClick="intentDepartment"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/facebody_text"
+                app:srcCompat="@drawable/ic_house_clean"/>
+
+            <TextView
+                android:id="@+id/house_cleaning_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/house_cleaning"
+                android:textSize="18sp"
+                app:fontFamily="@font/assistant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/house_cleaning" />
 
         </LinearLayout>
     </ScrollView>

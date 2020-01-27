@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Sabonit</string>
     <string name="empty_cart_emoji">&#x1F644;</string>
+    <string name="aqua">Aqua</string>
+    <string name="roses">Roses</string>
+    <string name="apple">Apple</string>
+    <string name="_0_0l">0.0L</string>
+    <string name="add_to_my_cart">add to my cart</string>
+    <string name="description">description</string>
+    <string name="name">name</string>
+    <string name="laundry_department">Laundry Department</string>
+    <string name="laundry">Laundry</string>
+    <string name="face_amp_body_wash"><![CDATA[Face & Body Wash]]></string>
+    <string name="hand_soap">Hand Soap</string>
+    <string name="dishwashing_liquid">Dishwashing Liquid</string>
+    <string name="house_cleaning">House Cleaning</string>
 </resources>
