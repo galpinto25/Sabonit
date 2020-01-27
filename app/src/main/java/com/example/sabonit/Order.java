@@ -44,6 +44,11 @@ public class Order
         return this.liters;
     }
 
+    public void setNewBottle(boolean isNewBottle)
+    {
+        this.product.setNewBottle(isNewBottle);
+    }
+
     public Product getProduct() {
         return product;
     }

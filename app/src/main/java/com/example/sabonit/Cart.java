@@ -59,7 +59,7 @@ public class Cart
         int index = findProductIndex(product.getFullName());
         if (index >= 0) {
             double newAmount = ordersList.get(index).setLiters(liters);
-
+            ordersList.get(index).setNewBottle(product.isNewBottle());
             if (newAmount == 0) popOrderFromCart(index);
         }
         else
