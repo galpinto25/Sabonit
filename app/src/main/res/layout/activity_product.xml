@@ -11,15 +11,16 @@
         android:id="@+id/cart_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="35dp"
         android:gravity="clip_vertical|center_horizontal"
         android:text="@string/laundry_department"
         android:textColor="@android:color/black"
-        android:textSize="30sp"
-        app:fontFamily="@font/assistant"
+        android:textSize="18sp"
+        app:fontFamily="@font/fira_sans_bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/product_image" />
 
     <ImageButton
         android:id="@+id/back_to_categories"
@@ -36,30 +37,35 @@
         android:id="@+id/product_image"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="45dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cart_title"
-        app:srcCompat="@drawable/ic_basic_bottle_empty" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/ic_dishes" />
 
     <TextView
         android:id="@+id/product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="95dp"
         android:fontFamily="@font/assistant"
         android:text="@string/name"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.318"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_image" />
+        app:layout_constraintTop_toBottomOf="@+id/cart_title" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="140dp"
         android:fontFamily="@font/assistant"
         android:text="@string/description"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/product_name" />
 
@@ -69,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -76,8 +83,8 @@
             android:id="@+id/cart"
             android:layout_width="66dp"
             android:layout_height="50dp"
-            android:paddingRight="16dp"
             android:onClick="goToCart"
+            android:paddingRight="16dp"
             app:srcCompat="@drawable/ic_cart"
             tools:layout_editor_absoluteX="222dp"
             tools:layout_editor_absoluteY="21dp" />
@@ -121,10 +128,11 @@
         android:layout_height="20dp"
         android:layout_marginBottom="32dp"
         android:max="100"
-        android:maxHeight="6dp"
-        android:minHeight="10dp"
+        android:maxHeight="2dp"
+        android:minHeight="2dp"
         android:progress="0"
         android:progressDrawable="@drawable/seek_bar"
+        android:thumbTint="#000000"
         app:layout_constraintBottom_toTopOf="@+id/add_to_my_cart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -191,11 +199,21 @@
         android:id="@+id/checkbox_newBottle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="28dp"
         android:onClick="onCheckboxClicked"
         android:text="New bottle"
-        app:layout_constraintEnd_toStartOf="@+id/account_profile"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/liters"
+        app:layout_constraintTop_toBottomOf="@+id/scent_options" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_sabonit_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

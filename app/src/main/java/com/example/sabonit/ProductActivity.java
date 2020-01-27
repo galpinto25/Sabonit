@@ -109,41 +109,32 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void fillBottle(double curLitersInSeekBar, int color) {
+        Drawable drawable;
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, color);
         if (curLitersInSeekBar < 0.3) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_empty, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_empty, wrapper.getTheme());
         } else if (curLitersInSeekBar < 1) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_1, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_1, wrapper.getTheme());
         } else if (curLitersInSeekBar < 2) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_2, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_2, wrapper.getTheme());
         } else if (curLitersInSeekBar < 3) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_3, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_3, wrapper.getTheme());
         } else if (curLitersInSeekBar < 4) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_4, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_4, wrapper.getTheme());
         } else if (curLitersInSeekBar < 5) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_5, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_5, wrapper.getTheme());
         } else if (curLitersInSeekBar < 6) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_6, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_6, wrapper.getTheme());
         } else if (curLitersInSeekBar < 7) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_7, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_7, wrapper.getTheme());
         } else if (curLitersInSeekBar < 8) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_8, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_8, wrapper.getTheme());
         } else if (curLitersInSeekBar < 9) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_9, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_9, wrapper.getTheme());
         } else {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_10, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_10, wrapper.getTheme());
         }
+        productImage.setImageDrawable(drawable);
     }
 
     /**
