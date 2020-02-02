@@ -32,7 +32,6 @@ public class UserLoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private boolean loginState = false;
     private FirebaseFirestore db;
-    private boolean isAccountExist;
     TextView helloTitle;
     ImageView profileImage;
     Button continueLogin;
@@ -50,7 +49,6 @@ public class UserLoginActivity extends AppCompatActivity {
         continueLogin.setText("Continue");
         Bundle bundle = getIntent().getExtras();
         db = FirebaseFirestore.getInstance();
-        isAccountExist = false;
         if (bundle == null)
         {
             createSignInIntent();
@@ -93,11 +91,6 @@ public class UserLoginActivity extends AppCompatActivity {
                     // FirebaseUser.getIdToken() instead.
                     uid = user.getUid();
                     updateAccount();
-//                    if (! isAccountExist)
-//                    {
-//                        Account accountToAdd = new Account("abc", name, "0501234567");
-//                        db.collection("Accounts").document(uid).set(accountToAdd);
-//                    }
                     helloTitle.setText("Welcome, " + name + "!");
                 }
                 // ...
@@ -121,7 +114,6 @@ public class UserLoginActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d("SearchAccountIdSucess", "DocumentSnapshot data: " + document.getData());
-                        setAccountData(document);
                     } else {
                         Log.d("SearchAccountIdFailed", "No such document");
                         writeNewAccount();
@@ -133,14 +125,9 @@ public class UserLoginActivity extends AppCompatActivity {
         });
     }
 
-    private void setAccountData(DocumentSnapshot document) {
-        Account currentAccount = document.toObject(Account.class);
-        Account.setCurrentAccount(currentAccount);
-    }
-
     private void writeNewAccount()
     {
-        Account accountToAdd = new Account("ghi", name, "0501234567");
+        Account accountToAdd = new Account(name, uid);
         db.collection("Accounts").document(uid).set(accountToAdd);
     }
 
