@@ -3,7 +3,7 @@
     <color name="colorPrimary">#03A9F4</color>
     <color name="colorPrimaryDark">#00BCD4</color>
     <color name="colorAccent">#2196F3</color>
-    <color name="roses">#E05D89</color>
-    <color name="aqua">#3CA0E6</color>
-    <color name="apple">#82B912</color>
+    <color name="roses">#FFE1E1</color>
+    <color name="aqua">#E5D0FF</color>
+    <color name="apple">#D6FFA1</color>
 </resources>

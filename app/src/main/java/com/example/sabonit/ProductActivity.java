@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -35,6 +36,8 @@ import com.squareup.picasso.Picasso;
 
 public class ProductActivity extends AppCompatActivity {
 
+    private final int NEW_BOTTLE = -1;
+
     TextView departmentTitle;
     TextView productName;
     TextView productDescription;
@@ -50,6 +53,7 @@ public class ProductActivity extends AppCompatActivity {
     private SeekBar literSeekBar;
     private RadioGroup radioScentGroup;
     private int bottleColor = R.style.ColorRoses;
+    private double oldLitters = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -105,41 +109,32 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void fillBottle(double curLitersInSeekBar, int color) {
+        Drawable drawable;
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, color);
         if (curLitersInSeekBar < 0.3) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_empty, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_empty, wrapper.getTheme());
         } else if (curLitersInSeekBar < 1) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_1, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_1, wrapper.getTheme());
         } else if (curLitersInSeekBar < 2) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_2, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_2, wrapper.getTheme());
         } else if (curLitersInSeekBar < 3) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_3, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_3, wrapper.getTheme());
         } else if (curLitersInSeekBar < 4) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_4, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_4, wrapper.getTheme());
         } else if (curLitersInSeekBar < 5) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_5, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_5, wrapper.getTheme());
         } else if (curLitersInSeekBar < 6) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_6, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_6, wrapper.getTheme());
         } else if (curLitersInSeekBar < 7) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_7, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_7, wrapper.getTheme());
         } else if (curLitersInSeekBar < 8) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_8, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_8, wrapper.getTheme());
         } else if (curLitersInSeekBar < 9) {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_9, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_9, wrapper.getTheme());
         } else {
-            final Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_10, wrapper.getTheme());
-            productImage.setImageDrawable(drawable);
+              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_10, wrapper.getTheme());
         }
+        productImage.setImageDrawable(drawable);
     }
 
     /**
@@ -207,9 +202,18 @@ public class ProductActivity extends AppCompatActivity {
                             Log.d("", "Error getting documents: ", task.getException());
                         }
                         updateInitialProgress();
+                        updateCheckBoxNewBottle();
                     }
 
                 });
+    }
+
+    private void updateCheckBoxNewBottle() {
+        if (products.get(currentProductIndex).isNewBottle())
+        {
+            CheckBox checkBox = findViewById(R.id.checkbox_newBottle);
+            checkBox.setChecked(true);
+        }
     }
 
     public void goToCart(View view) {
@@ -224,8 +228,24 @@ public class ProductActivity extends AppCompatActivity {
         db.collection("Accounts").document(uid).update("cart", account.getCart());
     }
 
-    // todo needs to be implemented
-    public void setSeekBar(double liters) {
+    public void onCheckboxClicked(View view)
+    {
+        boolean checked = ((CheckBox) view).isChecked();
+        Product currentProduct = products.get(currentProductIndex);
+        currentProduct.setNewBottle(checked);
+        if (checked)
+        {
+            literSeekBar.setVisibility(View.INVISIBLE);
+            litersTitle.setVisibility(View.INVISIBLE);
+            oldLitters = currentProductLiters;
+            currentProductLiters = NEW_BOTTLE;
+        }
+        else
+        {
+            literSeekBar.setVisibility(View.VISIBLE);
+            litersTitle.setVisibility(View.VISIBLE);
+            currentProductLiters = oldLitters;
+        }
     }
 
     public void changeScent() {

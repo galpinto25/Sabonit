@@ -17,13 +17,16 @@ public class Product
     /* ********* Attributes: ********* */
     // The products are divided to categories, and every category is another department.
     private String department;
-    // The specific name of the product in the department.
-    private String name;
     // Price of one liter of the product, in use when computing the price of a given amount.
     private int pricePerLiter;
     // Optional, a short description or anything that not reflected in the product's department and name.
     private String description;
+//
     private String imageUrl;
+    //
+    private String smell;
+    //
+    private boolean isNewBottle;
 
 
     /* ********* Constructors: ********* */
@@ -38,14 +41,15 @@ public class Product
      * in the class documentation. Also it gets a factor of pricePerLiter for the total price
      * computation of orders.
      * @param department - a general category of the products.
-     * @param name - a specific product name in the department, probably the manufacturer name.
+     * @param smell - a specific product smell in the department, probably the manufacturer name.
      * @param pricePerLiter - price of one liter of the product.
      */
-    public Product(String department, String name, int pricePerLiter, String imageUrl) {
+    public Product(String department, String smell, int pricePerLiter, String imageUrl) {
         this.department = department;
-        this.name = name;
+        this.smell = smell;
         this.pricePerLiter = pricePerLiter;
         this.imageUrl = imageUrl;
+        isNewBottle = false;
     }
 
 
@@ -69,15 +73,8 @@ public class Product
         this.department = department;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getFullName() { return this.department + " " + this.name; }
+    public String getFullName() { return this.department + " " + this.smell; }
 
     public int getPricePerLiter() {
         return pricePerLiter;
@@ -93,5 +90,21 @@ public class Product
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getSmell() {
+        return smell;
+    }
+
+    public void setSmell(String smell) {
+        this.smell = smell;
+    }
+
+    public boolean isNewBottle() {
+        return isNewBottle;
+    }
+
+    public void setNewBottle(boolean newBottle) {
+        isNewBottle = newBottle;
     }
 }
