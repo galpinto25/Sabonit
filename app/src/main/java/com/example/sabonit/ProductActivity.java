@@ -32,8 +32,6 @@ import java.util.Objects;
 
 public class ProductActivity extends AppCompatActivity {
 
-    private final int NEW_BOTTLE = 10;
-
     TextView departmentTitle;
     TextView productName;
     TextView productDescription;
@@ -46,7 +44,7 @@ public class ProductActivity extends AppCompatActivity {
     private double currentProductLiters;
     private int initialProgress;
     private SeekBar literSeekBar;
-    private RadioGroup radioScentGroup;
+    private RadioGroup radioSmellGroup;
     private int bottleColor = R.style.ColorRoses;
     private double oldLitters = 0;
 
@@ -61,8 +59,8 @@ public class ProductActivity extends AppCompatActivity {
         litersTitle = findViewById(R.id.liters);
         productImage = findViewById(R.id.product_image);
         literSeekBar = findViewById(R.id.liter_seek_bar);
-        radioScentGroup = findViewById(R.id.scent_options);
-        radioScentGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        radioSmellGroup = findViewById(R.id.smell_options);
+        radioSmellGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 changeSmell();
@@ -244,7 +242,7 @@ public class ProductActivity extends AppCompatActivity {
     public void onCheckboxClicked(View view)
     {
         boolean checked = ((CheckBox) view).isChecked();
-        updateCheckBoxNewBottle();
+        updateNewBottle(checked);
     }
 
     private void updateNewBottle(boolean checked)
@@ -252,13 +250,17 @@ public class ProductActivity extends AppCompatActivity {
         currentProduct.setNewBottle(checked);
         if (checked)
         {
+            CheckBox checkBox = findViewById(R.id.checkbox_newBottle);
+            checkBox.setChecked(true);
             literSeekBar.setVisibility(View.INVISIBLE);
             litersTitle.setVisibility(View.INVISIBLE);
             oldLitters = currentProductLiters;
-            currentProductLiters = NEW_BOTTLE;
+            currentProductLiters = literSeekBar.getMax() / 10.0;
         }
         else
         {
+            CheckBox checkBox = findViewById(R.id.checkbox_newBottle);
+            checkBox.setChecked(false);
             literSeekBar.setVisibility(View.VISIBLE);
             litersTitle.setVisibility(View.VISIBLE);
             currentProductLiters = oldLitters;
@@ -270,7 +272,7 @@ public class ProductActivity extends AppCompatActivity {
 
     public void changeSmell() {
         // get selected radio button from radioGroup
-        int selectedId = radioScentGroup.getCheckedRadioButtonId();
+        int selectedId = radioSmellGroup.getCheckedRadioButtonId();
         switch (selectedId) {
             case R.id.radioButtonRoses:
                 bottleColor = R.style.ColorRoses;

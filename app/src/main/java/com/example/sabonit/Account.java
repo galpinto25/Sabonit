@@ -46,7 +46,7 @@ public class Account
     /* ********* Getters & Setters: ********* */
 
     public static Account getCurrentAccount() {
-        return Account.currentAccount;
+        return currentAccount;
     }
 
     public static void setCurrentAccount(Account currentAccount) {
