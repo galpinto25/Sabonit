@@ -15,10 +15,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,15 +28,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Random;
-
-import com.squareup.picasso.Picasso;
 
 public class ProductActivity extends AppCompatActivity {
 
-    private final int NEW_BOTTLE = -1;
+    private final int NEW_BOTTLE = 10;
 
     TextView departmentTitle;
     TextView productName;
@@ -46,10 +42,9 @@ public class ProductActivity extends AppCompatActivity {
     String department;
     //this is our db that contains all the information of the app
     private FirebaseFirestore db;
-    private ArrayList<Product> products;
-    private int currentProductIndex;
+    private Product currentProduct;
     private double currentProductLiters;
-    private int initalProgress;
+    private int initialProgress;
     private SeekBar literSeekBar;
     private RadioGroup radioScentGroup;
     private int bottleColor = R.style.ColorRoses;
@@ -70,20 +65,20 @@ public class ProductActivity extends AppCompatActivity {
         radioScentGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                changeScent();
+                changeSmell();
             }
         });
         Bundle bundle = getIntent().getExtras();
         db = FirebaseFirestore.getInstance();
-        products = new ArrayList<>();
-        initalProgress = 0;
+        // default value when initializing the seek bar
+        initialProgress = 0;
         if (bundle != null)
         {
             department = bundle.getString("Department");
-            departmentTitle.setText(department + "Department");
+            departmentTitle.setText(department + " Department");
         }
-        String dep = department.replace(" ", "").replace("\n", "");
-        updateProductsByDepartmentName(dep);
+        currentProduct = null;
+        updateCurrentProduct(department);
         literSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
 
             @Override
@@ -105,7 +100,8 @@ public class ProductActivity extends AppCompatActivity {
                 currentProductLiters = seekBar.getProgress() / 10.0;
             }
         });
-        literSeekBar.setProgress(initalProgress);
+        literSeekBar.setProgress(initialProgress);
+        fillBottle(0, bottleColor);
     }
 
     private void fillBottle(double curLitersInSeekBar, int color) {
@@ -138,7 +134,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     /**
-     * update the initial ammount of liter to be whats written in the db
+     * update the initial amount of liter to be whats written in the db
      */
     private void updateInitialProgress()
     {
@@ -146,23 +142,42 @@ public class ProductActivity extends AppCompatActivity {
         Cart currentCart = currentAccount.getCart();
         for (Order currentOrder:currentCart.getOrdersList())
         {
-            if (currentOrder.getProduct().getFullName().equals(products.get(currentProductIndex).getFullName()))
+            if (currentOrder.getProduct().getDepartment().equals(department))
             {
-                initalProgress = (int) (currentOrder.getLiters() * 10.0);
+                currentProduct = currentOrder.getProduct();
+                currentProductLiters = currentOrder.getLiters();
+                updateSmellRadioButton(currentProduct.getSmell());
+                initialProgress = (int) (currentOrder.getLiters() * 10.0);
                 break;
             }
-
         }
-        literSeekBar.setProgress(initalProgress);
+        literSeekBar.setProgress(initialProgress);
+        updateCheckBoxNewBottle();
     }
 
-    private void showRandomOnScreen() {
-        Random r = new Random();
-        int indexOfProduct = r.nextInt(products.size());
-        productName.setText(products.get(indexOfProduct).getFullName());
-        productDescription.setText(products.get(indexOfProduct).getDescription());
-//        Picasso.get().load(products.get(indexOfProduct).getImageUrl()).into(productImage);
-        currentProductIndex = indexOfProduct;
+    private void updateSmellRadioButton(String smell) {
+        RadioButton radioButtonRoses = findViewById(R.id.radioButtonRoses);
+        RadioButton radioButtonAqua = findViewById(R.id.radioButtonAqua);
+        RadioButton radioButtonApple = findViewById(R.id.radioButtonApple);
+        radioButtonRoses.setChecked(false);
+        radioButtonAqua.setChecked(false);
+        radioButtonApple.setChecked(false);
+        switch (smell) {
+            case "Roses":
+                radioButtonRoses.setChecked(true);
+                break;
+            case "Aqua":
+                radioButtonAqua.setChecked(true);
+                break;
+            case "Apple":
+                radioButtonApple.setChecked(true);
+                break;
+        }
+    }
+
+    private void displayProduct() {
+        productName.setText(currentProduct.getFullName());
+        productDescription.setText(currentProduct.getDescription());
     }
 
     public void backToCategories(View view) {
@@ -180,39 +195,36 @@ public class ProductActivity extends AppCompatActivity {
      * get as an input a product department name and add products to the products array
      * @param productDepartment the department name of the product
      */
-    private void updateProductsByDepartmentName(String productDepartment)
+    private void updateCurrentProduct(String productDepartment)
     {
         // Create a reference to the products table
         CollectionReference productsTableRef = db.collection("Products");
 
         // Create a query against the collection
         productsTableRef.whereEqualTo("department", productDepartment).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult()))
-                            {
-                                Log.d("product from query", document.getId() + " => " + document.getData());
-                                Product requestedProduct = document.toObject(Product.class);
-                                products.add(requestedProduct);
-                            }
-                            showRandomOnScreen();
-                        } else {
-                            Log.d("", "Error getting documents: ", task.getException());
-                        }
-                        updateInitialProgress();
-                        updateCheckBoxNewBottle();
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult()))
+                    {
+                        Log.d("product from query", document.getId() + " => " + document.getData());
+                        currentProduct = document.toObject(Product.class);
                     }
+                    displayProduct();
+                } else {
+                    Log.d("", "Error getting documents: ", task.getException());
+                }
+                updateInitialProgress();
+            }
 
-                });
+        });
     }
 
     private void updateCheckBoxNewBottle() {
-        if (products.get(currentProductIndex).isNewBottle())
+        if (currentProduct.isNewBottle())
         {
-            CheckBox checkBox = findViewById(R.id.checkbox_newBottle);
-            checkBox.setChecked(true);
+            updateNewBottle(true);
         }
     }
 
@@ -224,14 +236,19 @@ public class ProductActivity extends AppCompatActivity {
     public void addProductToCart(View view) {
         Account account = Account.getCurrentAccount();
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        account.getCart().addProductToCart(products.get(currentProductIndex), currentProductLiters);
+        account.getCart().addProductToCart(currentProduct, currentProductLiters);
         db.collection("Accounts").document(uid).update("cart", account.getCart());
+        goToCart(view);
     }
 
     public void onCheckboxClicked(View view)
     {
         boolean checked = ((CheckBox) view).isChecked();
-        Product currentProduct = products.get(currentProductIndex);
+        updateCheckBoxNewBottle();
+    }
+
+    private void updateNewBottle(boolean checked)
+    {
         currentProduct.setNewBottle(checked);
         if (checked)
         {
@@ -246,21 +263,26 @@ public class ProductActivity extends AppCompatActivity {
             litersTitle.setVisibility(View.VISIBLE);
             currentProductLiters = oldLitters;
         }
+        fillBottle(currentProductLiters, bottleColor);
+        litersTitle.setText(String.valueOf(currentProductLiters) + "L");
+        literSeekBar.setProgress((int) (currentProductLiters * 10));
     }
 
-    public void changeScent() {
+    public void changeSmell() {
         // get selected radio button from radioGroup
         int selectedId = radioScentGroup.getCheckedRadioButtonId();
-        Product currentProduct = products.get(currentProductIndex);
         switch (selectedId) {
-            case R.id.radioButton1:
+            case R.id.radioButtonRoses:
                 bottleColor = R.style.ColorRoses;
+                currentProduct.setSmell("Roses");
                 break;
-            case R.id.radioButton2:
+            case R.id.radioButtonAqua:
                 bottleColor = R.style.ColorAqua;
+                currentProduct.setSmell("Aqua");
                 break;
-            case R.id.radioButton3:
+            case R.id.radioButtonApple:
                 bottleColor = R.style.ColorApple;
+                currentProduct.setSmell("Apple");
                 break;
         }
         fillBottle(currentProductLiters, bottleColor);

@@ -37,16 +37,19 @@ public class CategoriesActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProductActivity.class);
         switch (view.getId()) {
             case R.id.face_body_wash:
-                intent.putExtra("Department", "Face & Body Wash\n");
+                intent.putExtra("Department", "Face & Body Wash");
                 break;
             case R.id.hand_soap:
-                intent.putExtra("Department", "Hand Soap ");
+                intent.putExtra("Department", "HandSoap");
                 break;
             case R.id.house_cleaning:
-                intent.putExtra("Department", "House Cleaning ");
+                intent.putExtra("Department", "House Cleaning");
                 break;
             case R.id.laundry:
-                intent.putExtra("Department", "Laundry ");
+                intent.putExtra("Department", "Laundry");
+                break;
+            case R.id.dishwashing_liquid:
+                intent.putExtra("Department", "Dishwashing Liquid");
                 break;
             default:
                 break;

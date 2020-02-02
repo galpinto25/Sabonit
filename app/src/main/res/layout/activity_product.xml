@@ -42,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:srcCompat="@drawable/ic_dishes" />
+        app:srcCompat="@drawable/ic_basic_bottle_empty" />
 
     <TextView
         android:id="@+id/product_name"
@@ -161,7 +161,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
-            android:id="@+id/radioButton1"
+            android:id="@+id/radioButtonRoses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -173,7 +173,7 @@
             android:textStyle="bold" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioButtonAqua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -184,7 +184,7 @@
             android:textStyle="bold" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/radioButtonApple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
