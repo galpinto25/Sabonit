@@ -20,9 +20,7 @@ public class Product
     // Price of one liter of the product, in use when computing the price of a given amount.
     private int pricePerLiter;
     // Optional, a short description or anything that not reflected in the product's department and name.
-    private String description;
-//
-    private String imageUrl;
+    private String description; //todo last decision
     //
     private String smell;
     //
@@ -44,11 +42,10 @@ public class Product
      * @param smell - a specific product smell in the department, probably the manufacturer name.
      * @param pricePerLiter - price of one liter of the product.
      */
-    public Product(String department, String smell, int pricePerLiter, String imageUrl) {
+    public Product(String department, String smell, int pricePerLiter) {
         this.department = department;
         this.smell = smell;
         this.pricePerLiter = pricePerLiter;
-        this.imageUrl = imageUrl;
         isNewBottle = false;
     }
 
@@ -82,14 +79,6 @@ public class Product
 
     public void setPricePerLiter(int pricePerLiter) {
         this.pricePerLiter = pricePerLiter;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public String getSmell() {
