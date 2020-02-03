@@ -154,21 +154,15 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void updateSmellRadioButton(String smell) {
-        RadioButton radioButtonRoses = findViewById(R.id.radioButtonRoses);
-        RadioButton radioButtonAqua = findViewById(R.id.radioButtonAqua);
-        RadioButton radioButtonApple = findViewById(R.id.radioButtonApple);
-        radioButtonRoses.setChecked(false);
-        radioButtonAqua.setChecked(false);
-        radioButtonApple.setChecked(false);
         switch (smell) {
             case "Roses":
-                radioButtonRoses.setChecked(true);
+                radioSmellGroup.check(R.id.radioButtonRoses);
                 break;
             case "Aqua":
-                radioButtonAqua.setChecked(true);
+                radioSmellGroup.check(R.id.radioButtonAqua);
                 break;
             case "Apple":
-                radioButtonApple.setChecked(true);
+                radioSmellGroup.check(R.id.radioButtonApple);
                 break;
         }
     }
