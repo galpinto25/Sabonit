@@ -56,4 +56,8 @@ public class Order
     public double getLiters() {
         return liters;
     }
+
+    public double calculatePrice() {
+        return product.getPricePerLiter() * liters;
+    }
 }

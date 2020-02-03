@@ -99,36 +99,36 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
         literSeekBar.setProgress(initialProgress);
-        fillBottle(0, bottleColor);
+//        fillBottle(0, bottleColor);
     }
 
     private void fillBottle(double curLitersInSeekBar, int color) {
-        Drawable drawable;
+        Drawable productDrawable;
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, color);
         if (curLitersInSeekBar < 0.3) {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_empty, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_empty, wrapper.getTheme());
         } else if (curLitersInSeekBar < 1) {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_1, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_1, wrapper.getTheme());
         } else if (curLitersInSeekBar < 2) {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_2, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_2, wrapper.getTheme());
         } else if (curLitersInSeekBar < 3) {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_3, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_3, wrapper.getTheme());
         } else if (curLitersInSeekBar < 4) {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_4, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_4, wrapper.getTheme());
         } else if (curLitersInSeekBar < 5) {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_5, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_5, wrapper.getTheme());
         } else if (curLitersInSeekBar < 6) {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_6, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_6, wrapper.getTheme());
         } else if (curLitersInSeekBar < 7) {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_7, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_7, wrapper.getTheme());
         } else if (curLitersInSeekBar < 8) {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_8, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_8, wrapper.getTheme());
         } else if (curLitersInSeekBar < 9) {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_9, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_9, wrapper.getTheme());
         } else {
-              drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_10, wrapper.getTheme());
+            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_10, wrapper.getTheme());
         }
-        productImage.setImageDrawable(drawable);
+        productImage.setImageDrawable(productDrawable);
     }
 
     /**
@@ -244,6 +244,7 @@ public class ProductActivity extends AppCompatActivity {
         updateNewBottle(checked);
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateNewBottle(boolean checked)
     {
         currentProduct.setNewBottle(checked);
