@@ -173,6 +173,11 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void backToCategories(View view) {
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
         Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
     }

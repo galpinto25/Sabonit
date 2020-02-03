@@ -33,6 +33,10 @@ public class CategoriesActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     public void intentDepartment(View view) {
         Intent intent = new Intent(this, ProductActivity.class);
         switch (view.getId()) {

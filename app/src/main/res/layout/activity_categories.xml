@@ -8,11 +8,21 @@
     tools:context=".CategoriesActivity">
 
     <ImageView
+        android:id="@+id/sabonit_title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_sabonit_logo" />
+
+    <ImageView
         android:id="@+id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="28dp"
         android:onClick="popHowItWorks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,8 +32,9 @@
         android:id="@+id/account_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -31,8 +42,8 @@
             android:id="@+id/cart"
             android:layout_width="66dp"
             android:layout_height="50dp"
-            android:paddingRight="16dp"
             android:onClick="goToCart"
+            android:paddingRight="16dp"
             app:srcCompat="@drawable/ic_cart"
             tools:layout_editor_absoluteX="222dp"
             tools:layout_editor_absoluteY="21dp" />
@@ -42,6 +53,7 @@
             android:layout_width="56dp"
             android:layout_height="50dp"
             android:paddingRight="16dp"
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_history"
             tools:layout_editor_absoluteX="281dp"
             tools:layout_editor_absoluteY="21dp" />
@@ -51,6 +63,7 @@
             android:layout_width="45dp"
             android:layout_height="50dp"
             android:onClick="logout"
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_logout"
             tools:layout_editor_absoluteX="340dp"
             tools:layout_editor_absoluteY="21dp" />
@@ -61,19 +74,19 @@
         android:id="@+id/catalog_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="110dp"
         android:fontFamily="@font/fira_sans_bold"
         android:letterSpacing="0.15"
         android:text="Catalog"
         android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <ScrollView
-        android:layout_width="157dp"
+        android:layout_width="140dp"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="24dp"
@@ -111,7 +124,7 @@
                 android:gravity="center"
                 android:text="@string/laundry"
                 android:textSize="18sp"
-                app:fontFamily="@font/assistant"
+                app:fontFamily="@font/fira_sans"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/laundry" />
@@ -136,7 +149,7 @@
                 android:gravity="center"
                 android:text="@string/hand_soap"
                 android:textSize="18sp"
-                app:fontFamily="@font/assistant"
+                app:fontFamily="@font/fira_sans"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hand_soap" />
@@ -159,11 +172,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="@string/dishwashing_liquid"
                 android:textSize="18sp"
-                app:fontFamily="@font/assistant"
+                app:fontFamily="@font/fira_sans"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dishwashing_liquid" />
@@ -188,10 +201,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:text="@string/face_amp_body_wash"
                 android:textSize="18sp"
-                app:fontFamily="@font/assistant"
+                app:fontFamily="@font/fira_sans"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/face_body_wash" />
@@ -207,7 +221,7 @@
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/facebody_text"
-                app:srcCompat="@drawable/ic_house_clean"/>
+                app:srcCompat="@drawable/ic_house_clean" />
 
             <TextView
                 android:id="@+id/house_cleaning_text"
@@ -217,7 +231,7 @@
                 android:gravity="center"
                 android:text="@string/house_cleaning"
                 android:textSize="18sp"
-                app:fontFamily="@font/assistant"
+                app:fontFamily="@font/fira_sans"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/house_cleaning" />

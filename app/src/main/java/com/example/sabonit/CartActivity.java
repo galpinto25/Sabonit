@@ -1,5 +1,6 @@
 package com.example.sabonit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void backTo(View view) {
-        super.onBackPressed();
+        onBackPressed();
     }
 
     public void printCartDescription() {
@@ -34,6 +35,12 @@ public class CartActivity extends AppCompatActivity {
             ordersDescription = new StringBuilder("Your cart is\n empty...\n\uD83D\uDE44");
         }
         cartDescription.setText(ordersDescription);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CategoriesActivity.class);
+        startActivity(intent);
     }
 
 }
