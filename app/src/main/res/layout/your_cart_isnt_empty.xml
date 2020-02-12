@@ -14,20 +14,20 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/fira_sans"
         android:gravity="center"
-        android:text="Hey! We noticed that your cart isn't empty"
-        android:textSize="30sp" />
+        android:text="Hey! We noticed that your\ncart is not empty"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/how_sabonit_works"
         android:layout_width="362dp"
         android:layout_height="99dp"
         android:fontFamily="@font/fira_sans"
-        android:gravity="center_vertical"
+        android:gravity="center|center_vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:text="You can edit or order the items which in your cart. Click cart button on the top right in the next screen"
+        android:text="You can edit or order the items in your cart. Click the cart button on the top right in the next screen"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/about_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fira_sans"
         android:gravity="center"
@@ -25,7 +25,7 @@
         android:gravity="center"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:text="Are you sure you want to order these items?"
+        android:text="Are you sure you want to order?\nNo regrets!"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="18sp" />
@@ -43,7 +43,7 @@
             android:layout_marginRight="16dp"
             android:background="@color/color_buttons_order_message"
             android:fontFamily="@font/fira_sans"
-            android:onClick="addProductToCart"
+            android:onClick="goToOrder"
             android:text="yes"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +55,7 @@
             android:layout_height="46dp"
             android:background="@color/color_buttons_order_message"
             android:fontFamily="@font/fira_sans"
-            android:onClick="addProductToCart"
+            android:onClick="goToCart"
             android:text="no"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
