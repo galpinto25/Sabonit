@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -119,6 +121,7 @@ public class UserLoginActivity extends AppCompatActivity {
                         Log.d("SearchAccountIdFailed", "No such document");
                         writeNewAccount();
                     }
+                    displayMessageIfCartIsEmpty();
                 } else {
                     Log.d("SearchInTheDBFailed", "get failed with ", task.getException());
                 }
@@ -185,6 +188,17 @@ public class UserLoginActivity extends AppCompatActivity {
 
     public void popHowItWorks(View view) {
         showHowItWorksDialog();
+    }
+
+    private void displayMessageIfCartIsEmpty()
+    {
+        if (! Account.getCurrentAccount().getCart().isCartEmpty())
+        {
+            FragmentManager fm = getSupportFragmentManager();
+            CartIsntEmptyDialogFragment cartIsntEmptyDialogFragment = CartIsntEmptyDialogFragment.newInstance();
+            cartIsntEmptyDialogFragment.show(fm, "cart_isnt_empty");
+        }
+
     }
 
 }

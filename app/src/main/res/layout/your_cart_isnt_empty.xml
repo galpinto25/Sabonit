@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="400dp"
+    android:layout_height="600dp"
+    android:gravity="center|center_vertical"
+    android:orientation="vertical"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp">
+
+    <TextView
+        android:id="@+id/about_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fira_sans"
+        android:gravity="center"
+        android:text="Hey! We noticed that your cart isn't empty"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/how_sabonit_works"
+        android:layout_width="362dp"
+        android:layout_height="99dp"
+        android:fontFamily="@font/fira_sans"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="You can edit or order the items which in your cart. Click cart button on the top right in the next screen"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+
+</LinearLayout>
