@@ -7,6 +7,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -19,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -69,7 +71,7 @@ public class ProductActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         db = FirebaseFirestore.getInstance();
         // default value when initializing the seek bar
-        initialProgress = 0;
+        initialProgress = 1;
         if (bundle != null)
         {
             department = bundle.getString("Department");
@@ -231,6 +233,16 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void addProductToCart(View view) {
+        if(currentProductLiters == 0)
+        {
+            Context context = getApplicationContext();
+            CharSequence text = "You can't add 0 liters!";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return;
+        }
         Account account = Account.getCurrentAccount();
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         account.getCart().addProductToCart(currentProduct, currentProductLiters);
