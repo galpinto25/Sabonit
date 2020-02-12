@@ -85,4 +85,13 @@ public class Cart
         this.ordersList = ordersList;
     }
 
+    /**
+     * check if the order list is empty or not
+     * @return empty - true, not empty - false
+     */
+    public boolean isCartEmpty()
+    {
+        return this.ordersList.size() == 0;
+    }
+
 }
