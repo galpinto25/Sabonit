@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -94,6 +95,19 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         db.collection("Accounts").document(uid).update("cart", cart);
         updateCartAdapter();
+    }
+
+    public void goToOrder(View view) {
+        showHowItWorksDialog();
+//        Intent intent = new Intent(this, OrderActivity.class);
+//        startActivity(intent);
+    }
+
+    private void showHowItWorksDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        OrderMessageDialogFragment orderMessageDialogFragment =
+                OrderMessageDialogFragment.newInstance();
+        orderMessageDialogFragment.show(fm, "order_message");
     }
 
 }
