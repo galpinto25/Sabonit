@@ -4,17 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,6 +59,17 @@ public class UserLoginActivity extends AppCompatActivity {
         {
             createSignInIntent();
         }
+
+        ImageView refillImage = findViewById(R.id.userlogin_gif_image);
+        Glide.with(this)
+                .load("https://gifimage.net/wp-content/uploads/2018/06/water-drops-gif-11.gif")
+                .into(refillImage);
+
+        Animation animation = new TranslateAnimation(-500, 1500,0, 0);
+        animation.setDuration(10000);
+        animation.setRepeatCount(5);
+        animation.setFillAfter(true);
+        refillImage.startAnimation(animation);
     }
 
     public void createSignInIntent() {

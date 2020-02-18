@@ -102,6 +102,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
     public void goToOrder(View view) {
         //showHowItWorksDialog();
         if (cart.isCartEmpty())
+        
         {
             Context context = getApplicationContext();
             CharSequence text = "You can't order empty cart";

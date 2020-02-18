@@ -32,6 +32,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
 
+import maes.tech.intentanim.CustomIntent;
+
 public class ProductActivity extends AppCompatActivity {
 
     TextView departmentTitle;
@@ -182,6 +184,7 @@ public class ProductActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
+        CustomIntent.customType(this, "right-to-left");
     }
 
     public void logout(View view) {
