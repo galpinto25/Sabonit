@@ -5,12 +5,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -19,6 +21,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
+
+import maes.tech.intentanim.CustomIntent;
 
 public class CategoriesActivity extends AppCompatActivity {
 
@@ -44,7 +48,7 @@ public class CategoriesActivity extends AppCompatActivity {
                 intent.putExtra("Department", "Face & Body Wash");
                 break;
             case R.id.hand_soap:
-                intent.putExtra("Department", "HandSoap");
+                intent.putExtra("Department", "Hand Soap");
                 break;
             case R.id.house_cleaning:
                 intent.putExtra("Department", "House Cleaning");
@@ -59,6 +63,7 @@ public class CategoriesActivity extends AppCompatActivity {
                 break;
         }
         startActivity(intent);
+        CustomIntent.customType(this, "left-to-right");
     }
 
     /**

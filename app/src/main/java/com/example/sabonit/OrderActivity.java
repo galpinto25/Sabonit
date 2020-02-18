@@ -4,19 +4,51 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.ImageView;
 
-public class OrderActivity extends AppCompatActivity {
+import com.bumptech.glide.Glide;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class OrderActivity extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        runConfirmationGif();
+        new CountDownTimer(4450, 1000) {
+            public void onTick(long millisUntilFinished) {}
+            public void onFinish()
+            {
+                findViewById(R.id.order_gif_image).setVisibility(View.INVISIBLE);
+                findViewById(R.id.order_message).setVisibility(View.VISIBLE);
+            }
+        }.start();
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
     }
+
+    private void runConfirmationGif()
+    {
+        ImageView refillImage = findViewById(R.id.order_gif_image);
+        Glide.with(this)
+                .load("https://cdn.dribbble.com/users/1690341/screenshots/5705146/" +
+                        "tick-animation_complete.gif")
+                .into(refillImage);
+    }
+
+    // entry screen gif
+    //https://s3.medialoot.com/blog-images/WaterFill.gif?mtime=20180323162352
 
 }
