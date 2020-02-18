@@ -24,6 +24,8 @@ public class Account
     // The account of the user that is logged in
     private static Account currentAccount;
 
+    private ConfirmedOrders confirmedOrders;
+
     /* ********* Constructors: ********* */
     /**
      * Default constructor.
@@ -41,6 +43,7 @@ public class Account
         this.cart = new Cart();
         this.UID = uid;
         currentAccount = this;
+        confirmedOrders = new ConfirmedOrders();
     }
 
     /* ********* Getters & Setters: ********* */
@@ -75,6 +78,14 @@ public class Account
 
     public void setUID(String UID) {
         this.UID = UID;
+    }
+
+    public ConfirmedOrders getConfirmedOrders() {
+        return confirmedOrders;
+    }
+
+    public void setConfirmedOrders(ConfirmedOrders confirmedOrders) {
+        this.confirmedOrders = confirmedOrders;
     }
 }
 

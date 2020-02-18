@@ -1,9 +1,11 @@
 package com.example.sabonit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -98,9 +100,23 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
     }
 
     public void goToOrder(View view) {
-        showHowItWorksDialog();
-//        Intent intent = new Intent(this, OrderActivity.class);
-//        startActivity(intent);
+        //showHowItWorksDialog();
+        if (cart.isCartEmpty())
+        {
+            Context context = getApplicationContext();
+            CharSequence text = "You can't order empty cart";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return;
+        }
+        Account.getCurrentAccount().getConfirmedOrders().addCart(cart);
+        Account.getCurrentAccount().setCart(new Cart());
+        String uid = Account.getCurrentAccount().getUID();
+        db.collection("Accounts").document(uid).set(Account.getCurrentAccount());
+        Intent intent = new Intent(this, OrderActivity.class);
+        startActivity(intent);
     }
 
     private void showHowItWorksDialog() {
