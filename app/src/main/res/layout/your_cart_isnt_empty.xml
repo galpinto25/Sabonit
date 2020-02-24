@@ -14,20 +14,55 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/fira_sans"
         android:gravity="center"
-        android:text="Hey! We noticed that your\ncart is not empty"
+        android:text="Hey!\nYour cart is not empty"
         android:textSize="24sp" />
 
     <TextView
         android:id="@+id/how_sabonit_works"
         android:layout_width="362dp"
-        android:layout_height="99dp"
+        android:layout_height="60dp"
         android:fontFamily="@font/fira_sans"
         android:gravity="center|center_vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:text="You can edit or order the items in your cart. Click the cart button on the top right in the next screen"
+        android:text="How do you want to continue?"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/go_to_cart_button"
+            android:layout_width="120dp"
+            android:layout_height="46dp"
+            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/fira_sans"
+            android:onClick="goToOrder"
+            android:text="go to cart"
+            android:textColor="@color/color_yes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/cancel_order_button"
+            android:layout_width="120dp"
+            android:layout_height="46dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/fira_sans"
+            android:onClick="goToCart"
+            android:text="cancel order"
+            android:textColor="@color/color_no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
 
 </LinearLayout>

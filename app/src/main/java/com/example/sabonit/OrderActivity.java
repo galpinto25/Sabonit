@@ -28,6 +28,10 @@ public class OrderActivity extends AppCompatActivity
             {
                 findViewById(R.id.order_gif_image).setVisibility(View.INVISIBLE);
                 findViewById(R.id.order_message).setVisibility(View.VISIBLE);
+                findViewById(R.id.order_intro).setVisibility(View.VISIBLE);
+                findViewById(R.id.order_button).setVisibility(View.VISIBLE);
+                findViewById(R.id.drop_gif_image).setVisibility(View.VISIBLE);
+                runDropGif();
             }
         }.start();
     }
@@ -48,7 +52,18 @@ public class OrderActivity extends AppCompatActivity
                 .into(refillImage);
     }
 
-    // entry screen gif
-    //https://s3.medialoot.com/blog-images/WaterFill.gif?mtime=20180323162352
+    private void runDropGif()
+    {
+        ImageView refillImage = findViewById(R.id.drop_gif_image);
+        Glide.with(this)
+                .load("https://gifimage.net/wp-content/uploads/2018/06/" +
+                        "water-drops-gif-11.gif")
+                .into(refillImage);
+    }
+
+    public void goToCategories(View view) {
+        Intent intent = new Intent(this, CategoriesActivity.class);
+        startActivity(intent);
+    }
 
 }

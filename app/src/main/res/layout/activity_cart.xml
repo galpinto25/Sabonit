@@ -82,13 +82,13 @@
     <TextView
         android:id="@+id/items_list"
         android:layout_width="205dp"
-        android:layout_height="53dp"
+        android:layout_height="70dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/fira_sans"
         android:gravity="center_horizontal"
-        android:text="HandSoap Kef\nLanudry Tide"
+        android:text="Your cart is empty"
         android:textSize="18sp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />

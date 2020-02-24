@@ -216,4 +216,10 @@ public class UserLoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        this.finishAffinity();
+        System.exit(0);
+    }
+
 }
