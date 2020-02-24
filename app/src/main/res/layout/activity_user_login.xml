@@ -25,6 +25,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/fira_sans"
         android:text="Welcome, Guest!"
+        android:textColor="@android:color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

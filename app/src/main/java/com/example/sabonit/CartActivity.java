@@ -41,6 +41,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
         // specifies a CartAdapter
         updateCartAdapter();
         db = FirebaseFirestore.getInstance();
+        printEmptyCartDescription();
         // todo needs to implement total price function
         // updateTotalPrice();
     }
@@ -65,16 +66,8 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
         onBackPressed();
     }
 
-    public void printCartDescription() {
-        StringBuilder ordersDescription = new StringBuilder();
-        for (Order order: cart.getOrdersList()) {
-            Product product = order.getProduct();
-            ordersDescription.append(product.getFullName()).append(" - ").
-                    append(product.getPricePerLiter() * order.getLiters()).append("NIS\n");
-        }
-        if (ordersDescription.length() == 0) {
-            ordersDescription = new StringBuilder("Your cart is\n empty...\n\uD83D\uDE44");
-        }
+    public void printEmptyCartDescription() {
+        StringBuilder ordersDescription = new StringBuilder("Your cart is\n empty...\n\uD83D\uDE44");
         cartDescription.setText(ordersDescription);
     }
 
@@ -100,9 +93,22 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
     }
 
     public void goToOrder(View view) {
-        //showHowItWorksDialog();
         if (cart.isCartEmpty())
-        
+        {
+            Context context = getApplicationContext();
+            CharSequence text = "You can't order empty cart";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+        else {
+            showHowItWorksDialog();
+        }
+    }
+
+    public void orderItems() {
+        if (cart.isCartEmpty())
         {
             Context context = getApplicationContext();
             CharSequence text = "You can't order empty cart";

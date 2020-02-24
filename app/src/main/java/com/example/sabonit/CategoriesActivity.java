@@ -39,6 +39,8 @@ public class CategoriesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        this.finishAffinity();
+        System.exit(0);
     }
 
     public void intentDepartment(View view) {
