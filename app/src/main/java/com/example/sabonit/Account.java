@@ -35,7 +35,7 @@ public class Account
      * @param name - user's name.
      * @param uid - user's UID.
      */
-    Account(String name, String uid)
+    public Account(String name, String uid)
     {
         this.name = name;
         this.cart = new Cart();
@@ -49,7 +49,7 @@ public class Account
     /**
      * Returns the current account.
      */
-    static Account getCurrentAccount()
+    public static Account getCurrentAccount()
     {
         return currentAccount;
     }
@@ -58,7 +58,7 @@ public class Account
      * Sets the current account.
      * @param currentAccount a given account.
      */
-    static void setCurrentAccount(Account currentAccount)
+    public static void setCurrentAccount(Account currentAccount)
     {
         Account.currentAccount = currentAccount;
     }
@@ -100,7 +100,7 @@ public class Account
     /**
      * Returns the UID of the account.
      */
-    String getUID()
+    public String getUID()
     {
         return UID;
     }
@@ -117,7 +117,7 @@ public class Account
     /**
      * Returns the confirmed orders of the account.
      */
-    ConfirmedOrders getConfirmedOrders()
+    public ConfirmedOrders getConfirmedOrders()
     {
         return confirmedOrders;
     }
