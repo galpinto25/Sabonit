@@ -37,27 +37,27 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/yes_button"
+            android:id="@+id/continue_button"
             android:layout_width="wrap_content"
             android:layout_height="46dp"
             android:layout_marginRight="16dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/fira_sans"
             android:onClick="goToOrder"
-            android:text="yes"
+            android:text="continue"
             android:textColor="@color/color_yes"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/no_button"
+            android:id="@+id/go_back_button"
             android:layout_width="wrap_content"
             android:layout_height="46dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/fira_sans"
             android:onClick="goToCart"
-            android:text="no"
+            android:text="go back"
             android:textColor="@color/color_no"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
