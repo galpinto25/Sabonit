@@ -37,12 +37,6 @@ public class CartIsntEmptyDialogFragment extends DialogFragment implements
         return frag;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.your_cart_isnt_empty, container);
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -64,10 +58,6 @@ public class CartIsntEmptyDialogFragment extends DialogFragment implements
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cancel_order_button:
-//                CartActivity callingActivity = (CartActivity) getActivity();
-//                if (callingActivity != null) {
-//                    callingActivity.orderItems();
-//                }
                 Account accountToAdd = Account.getCurrentAccount();
                 accountToAdd.setCart(new Cart());
                 String uid = accountToAdd.getUID();
