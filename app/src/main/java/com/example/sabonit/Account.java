@@ -25,7 +25,7 @@ public class Account
 
     /* ********* Constructors: ********* */
     /**
-     * Default constructor.
+     * Default constructor
      */
     public Account()
     {}
