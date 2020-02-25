@@ -37,6 +37,21 @@ need to buy a new bottle.\n\nDid we mention already how simple is Sabonit?"
         android:id="@+id/gif_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="8dp"
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+
+    <Button
+        android:id="@+id/got_it_button"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/fira_sans"
+        android:onClick="goToOrder"
+        android:text="got it!"
+        android:textColor="@color/color_yes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </LinearLayout>
