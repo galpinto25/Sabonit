@@ -1,12 +1,7 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,11 +11,13 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,23 +27,35 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-public class UserLoginActivity extends AppCompatActivity {
+/**
+ * This class represents the user login activity.
+ */
+public class UserLoginActivity extends AppCompatActivity
+{
 
+    /* ********* Attributes: ********* */
+    // Arbitrary value for the login launching
     private static final int RC_SIGN_IN = 123;
+    // Indicates if there is no logged in user, for choosing if start the login process
     private boolean loginState = false;
     private FirebaseFirestore db;
-    TextView helloTitle;
-    ImageView profileImage;
-    Button continueLogin;
-    String name;
-    String uid;
+    private TextView helloTitle;
+    private ImageView profileImage;
+    private Button continueLogin;
+    private String name;
+    private String uid;
 
+    /**
+     * Displays the user login activity.
+     */
     @SuppressLint("SetTextI18n")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login);
         helloTitle = findViewById(R.id.hello_text);
@@ -54,30 +63,36 @@ public class UserLoginActivity extends AppCompatActivity {
         continueLogin = findViewById(R.id.continue_or_login);
         continueLogin.setText("Continue");
         Bundle bundle = getIntent().getExtras();
-        db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance(); // todo access to db via utils
         if (bundle == null)
         {
             createSignInIntent();
         }
 
+        // Presents the water drop gif on the screen and animate it to walk
         ImageView refillImage = findViewById(R.id.userlogin_gif_image);
         Glide.with(this)
-                .load("https://gifimage.net/wp-content/uploads/2018/06/water-drops-gif-11.gif")
+                .load("https://gifimage.net/wp-content/uploads/2018/06/" +
+                        "water-drops-gif-11.gif")
                 .into(refillImage);
-
-        Animation animation = new TranslateAnimation(-500, 1500,0, 0);
+        Animation animation = new TranslateAnimation(-500, 1500,0,
+                0);
         animation.setDuration(10000);
         animation.setRepeatCount(5);
         animation.setFillAfter(true);
         refillImage.startAnimation(animation);
     }
 
-    public void createSignInIntent() {
-        // Choose authentication providers
-        List<AuthUI.IdpConfig> providers = Arrays.asList(
+    /**
+     * Creates a sign in intent with Google authentication.
+     */
+    private void createSignInIntent()
+    {
+        // Chooses authentication providers
+        List<AuthUI.IdpConfig> providers = Collections.singletonList(
                 new AuthUI.IdpConfig.GoogleBuilder().build());
 
-        // Create and launch sign-in intent
+        // Creates and launches sign-in intent
         startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
@@ -86,138 +101,199 @@ public class UserLoginActivity extends AppCompatActivity {
                 RC_SIGN_IN);
     }
 
+    /**
+     * Manages the sign in activity - checks whether the sign in succeeded or not.
+     */
     @SuppressLint("SetTextI18n")
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-
-            if (resultCode == RESULT_OK) {
-                // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-                    // Name, email address, and profile photo Url
-                    name = user.getDisplayName();
-                    String email = user.getEmail();
-                    Picasso.get().load(user.getPhotoUrl()).into(profileImage);
-                    // Check if user's email is verified
-                    // The user's ID, unique to the Firebase project. Do NOT use this value to
-                    // authenticate with your backend server, if you have one. Use
-                    // FirebaseUser.getIdToken() instead.
-                    uid = user.getUid();
-                    updateAccount();
-                    helloTitle.setText("Welcome, " + name + "!");
-                }
-                // ...
-            } else {
-                logOut();
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
+        // Checks whether the request is to sign in
+        if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK)
+        {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                // name, email address, and profile photo Url
+                name = user.getDisplayName();
+                String email = user.getEmail();
+                Picasso.get().load(user.getPhotoUrl()).into(profileImage);
+                uid = user.getUid();
+                updateAccount();
+                helloTitle.setText("Welcome, " + name + "!");
             }
+        }
+        else
+        {
+            // If the sign in failed
+            logOut();
         }
     }
 
+    /**
+     * After the successful sign in this function updates the account in the database, if it exists.
+     * else, creates a new account in the database.
+     */
     private void updateAccount()
     {
-        DocumentReference accountsRef = db.collection("Accounts").document(uid);
-        accountsRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        //
+        DocumentReference accountsReference = db.collection("Accounts").document(uid);
+        accountsReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
+        {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task)
+            {
+                if (task.isSuccessful())
+                {
                     DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("SearchAccountIdSucess", "DocumentSnapshot data: " + document.getData());
+                    if (Objects.requireNonNull(document).exists())
+                    {
+                        Log.d("SearchAccountIdSucess", "DocumentSnapshot data: " +
+                                document.getData());
                         setAccountData(document);
-                    } else {
+                    }
+                    else
+                    {
                         Log.d("SearchAccountIdFailed", "No such document");
                         writeNewAccount();
                     }
-                    displayMessageIfCartIsEmpty();
-                } else {
+                    popCartIsntEmptyDialog();
+                }
+                else
+                {
                     Log.d("SearchInTheDBFailed", "get failed with ", task.getException());
                 }
             }
         });
     }
 
-
+    /**
+     * Extracts the required account from the database, and set the current account to be this
+     * account.
+     */
     private void setAccountData(DocumentSnapshot document)
     {
         Account currentAccount = document.toObject(Account.class);
         Account.setCurrentAccount(currentAccount);
     }
 
+    /**
+     * Writes a new account in the databases, using the name and uid that was extracted earlier in
+     * the login process.
+     */
     private void writeNewAccount()
     {
         Account accountToAdd = new Account(name, uid);
         db.collection("Accounts").document(uid).set(accountToAdd);
     }
 
+    /**
+     * When the user logouts, this function handle the logout process.
+     */
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null)
+        // checks if we got here by logout
+        if (bundle != null && bundle.getInt("Logout") == 0)
         {
-            if (bundle.getInt("Logout") == 0) {
-                getIntent().removeExtra("Logout");
-                logOut();
-            }
+            getIntent().removeExtra("Logout");
+            logOut();
         }
     }
 
+    /**
+     * Manages the log in process, When there is no logged in user.
+     */
     @SuppressLint("SetTextI18n")
-    public void LogIn() {
+    private void LogIn()
+    {
         createSignInIntent();
+        // sets the activity state to new logged in user state
         continueLogin.setText("Continue");
         loginState = false;
     }
 
+    /**
+     * Manages the logout process.
+     */
     @SuppressLint("SetTextI18n")
-    public void logOut() {
+    private void logOut()
+    {
         FirebaseAuth.getInstance().signOut();
+        // sets the activity state to no user state
         helloTitle.setText("You have been logged out");
         continueLogin.setText("Log In");
         loginState = true;
         profileImage.setImageResource(R.drawable.ic_guest_user);
     }
 
-    public void continueOrLogin(View view) {
-        if (loginState) {
+    /**
+     * Manages the process of login or continue with the current logged in user.
+     */
+    public void continueOrLogin(View view)
+    {
+        // checks if there is no logged in user
+        if (loginState)
+        {
             LogIn();
-        } else {
+        }
+        else
+        {
             Intent intent = new Intent(this, CategoriesActivity.class);
             startActivity(intent);
         }
     }
 
-    private void showHowItWorksDialog() {
+    private void displayHowItWorksDialog()
+    {
+        // todo utils 1
+
+        // creates the FragmentManager object
         FragmentManager fm = getSupportFragmentManager();
         HowItWorksDialogFragment howItWorksDialogFragment = HowItWorksDialogFragment.newInstance();
+        // show the relevant message
         howItWorksDialogFragment.show(fm, "how_it_works");
     }
 
-    public void popHowItWorks(View view) {
-        showHowItWorksDialog();
+    /**
+     * Displays the "how it works" message.
+     */
+    public void popHowItWorks(View view)
+    {
+        displayHowItWorksDialog();
     }
 
     private void displayMessageIfCartIsEmpty()
     {
-        if (! Account.getCurrentAccount().getCart().isCartEmpty())
-        {
-            FragmentManager fm = getSupportFragmentManager();
-            CartIsntEmptyDialogFragment cartIsntEmptyDialogFragment = CartIsntEmptyDialogFragment.newInstance();
-            cartIsntEmptyDialogFragment.show(fm, "cart_isnt_empty");
-        }
+        //todo utils 1
 
+        // creates the FragmentManager object
+        FragmentManager fm = getSupportFragmentManager();
+        CartIsntEmptyDialogFragment cartIsntEmptyDialogFragment =
+                CartIsntEmptyDialogFragment.newInstance();
+        // show the relevant message
+        cartIsntEmptyDialogFragment.show(fm, "cart_isnt_empty");
     }
 
+    /**
+     * This function responsible for showing a message about a non finished order.
+     * The message shown only when the user's cart is not empty.
+     */
+    private void popCartIsntEmptyDialog()
+    {
+        // checks if the cart is not empty
+        if (! Account.getCurrentAccount().getCart().isCartEmpty())
+            displayMessageIfCartIsEmpty();
+    }
+
+    /**
+     * Clicking on back press closing up the application.
+     */
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         this.finishAffinity();
         System.exit(0);
     }
