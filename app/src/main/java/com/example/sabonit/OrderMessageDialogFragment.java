@@ -1,12 +1,11 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -14,22 +13,33 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Objects;
 
+/**
+ * This class represents an order message which extends DialogFragment class.
+ */
 public class OrderMessageDialogFragment extends DialogFragment implements
         android.view.View.OnClickListener {
 
-    public OrderMessageDialogFragment() {
-        // Empty constructor is required for DialogFragment
-        // Make sure not to add arguments to the constructor
-        // Use `newInstance` instead as shown below
-    }
+    /* ********* Constructors: ********* */
+    /**
+     * Default constructor
+     */
+    public OrderMessageDialogFragment()
+    {}
 
-    public static OrderMessageDialogFragment newInstance() {
+    /**
+     * Returns the fragment of the order message dialog.
+     */
+    public static OrderMessageDialogFragment newInstance()
+    {
         OrderMessageDialogFragment frag = new OrderMessageDialogFragment();
         Bundle args = new Bundle();
         frag.setArguments(args);
         return frag;
     }
 
+    /**
+     * Creates the order message dialog and creates onClickListeners to its buttons.
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -38,24 +48,27 @@ public class OrderMessageDialogFragment extends DialogFragment implements
                 getLayoutInflater().inflate(R.layout.order_message, null);
         builder.setView(view);
         if (view != null) {
-            Button yesButton = view.findViewById(R.id.yes_button);
-            yesButton.setOnClickListener(this);
-            Button noButton = view.findViewById(R.id.no_button);
-            noButton.setOnClickListener(this);
+            Button continueButton = view.findViewById(R.id.continue_button);
+            continueButton.setOnClickListener(this);
+            Button goBackButton = view.findViewById(R.id.go_back_button);
+            goBackButton.setOnClickListener(this);
         }
         return builder.create();
     }
 
+    /**
+     * Implements the onClickListeners of the 'continue'/'go back' buttons of order message.
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.yes_button:
+            case R.id.continue_button:
                 CartActivity callingActivity = (CartActivity) getActivity();
                 if (callingActivity != null) {
                     callingActivity.orderItems();
                 }
                 break;
-            case R.id.no_button:
+            case R.id.go_back_button:
                 dismiss();
                 break;
             default:
