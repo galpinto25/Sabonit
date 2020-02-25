@@ -267,8 +267,7 @@ public class UserLoginActivity extends AppCompatActivity
 
     private void displayMessageIfCartIsEmpty()
     {
-        //todo utils 1
-
+        // todo utils 1
         // creates the FragmentManager object
         FragmentManager fm = getSupportFragmentManager();
         CartIsntEmptyDialogFragment cartIsntEmptyDialogFragment =
@@ -284,7 +283,7 @@ public class UserLoginActivity extends AppCompatActivity
     private void popCartIsntEmptyDialog()
     {
         // checks if the cart is not empty
-        if (! Account.getCurrentAccount().getCart().isCartEmpty())
+        if (!Account.getCurrentAccount().getCart().isCartEmpty())
             displayMessageIfCartIsEmpty();
     }
 
