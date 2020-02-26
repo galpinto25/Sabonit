@@ -70,10 +70,10 @@
 
     <ImageButton
         android:id="@+id/back_to"
-        android:layout_width="36dp"
-        android:layout_height="33dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/ic_back"
         android:onClick="backTo"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,13 +81,13 @@
 
     <ImageButton
         android:id="@+id/back_to2"
-        android:layout_width="36dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="356dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/ic_plus"
         android:onClick="backTo"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

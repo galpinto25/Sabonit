@@ -5,14 +5,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -39,8 +37,7 @@ public class CategoriesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        this.finishAffinity();
-        System.exit(0);
+        showExitDialog();
     }
 
     public void intentDepartment(View view) {
@@ -122,9 +119,14 @@ public class CategoriesActivity extends AppCompatActivity {
         howItWorksDialogFragment.show(fm, "how_it_works");
     }
 
+    private void showExitDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        ExitDialogFragment exitDialogFragment = ExitDialogFragment.newInstance();
+        exitDialogFragment.show(fm, "exit_message");
+    }
+
     public void popHowItWorks(View view) {
         showHowItWorksDialog();
     }
-
 
 }

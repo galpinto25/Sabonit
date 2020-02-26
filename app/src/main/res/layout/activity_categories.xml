@@ -22,7 +22,7 @@
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:onClick="popHowItWorks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +32,7 @@
         android:id="@+id/account_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,8 +40,8 @@
 
         <ImageView
             android:id="@+id/cart"
-            android:layout_width="66dp"
-            android:layout_height="50dp"
+            android:layout_width="76dp"
+            android:layout_height="60dp"
             android:onClick="goToCart"
             android:paddingRight="16dp"
             app:srcCompat="@drawable/ic_cart"

@@ -37,20 +37,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/go_to_cart_button"
-            android:layout_width="120dp"
-            android:layout_height="46dp"
-            android:layout_marginRight="16dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/fira_sans"
-            android:onClick="goToOrder"
-            android:text="go to cart"
-            android:textColor="@color/color_yes"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
             android:id="@+id/cancel_order_button"
             android:layout_width="120dp"
             android:layout_height="46dp"
@@ -59,6 +45,19 @@
             android:onClick="goToCart"
             android:text="cancel order"
             android:textColor="@color/color_no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/go_to_cart_button"
+            android:layout_width="120dp"
+            android:layout_height="46dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/fira_sans"
+            android:onClick="goToOrder"
+            android:text="go to cart"
+            android:textColor="@color/color_yes"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

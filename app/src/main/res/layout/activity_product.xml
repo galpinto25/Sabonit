@@ -27,7 +27,7 @@
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/ic_back"
         android:onClick="backToCategories"
         app:layout_constraintStart_toStartOf="parent"
