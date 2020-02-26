@@ -35,11 +35,15 @@
 
     <ImageView
         android:id="@+id/product_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="219dp"
+        android:layout_height="212dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/checkbox_newBottle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cart_title"
         app:srcCompat="@drawable/ic_basic_bottle_empty" />

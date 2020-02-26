@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -30,6 +31,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 import maes.tech.intentanim.CustomIntent;
@@ -51,6 +55,8 @@ public class ProductActivity extends AppCompatActivity {
     private RadioGroup radioSmellGroup;
     private int bottleColor = R.style.ColorRoses;
     private double oldLitters = 0;
+
+//    private Map<String, ArrayList<Drawable>> xml_map= new ArrayMap<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -109,28 +115,126 @@ public class ProductActivity extends AppCompatActivity {
     private void fillBottle(double curLitersInSeekBar, int color) {
         Drawable productDrawable;
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, color);
-        if (curLitersInSeekBar < 0.3) {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_empty, wrapper.getTheme());
-        } else if (curLitersInSeekBar < 1) {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_1, wrapper.getTheme());
-        } else if (curLitersInSeekBar < 2) {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_2, wrapper.getTheme());
-        } else if (curLitersInSeekBar < 3) {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_3, wrapper.getTheme());
-        } else if (curLitersInSeekBar < 4) {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_4, wrapper.getTheme());
-        } else if (curLitersInSeekBar < 5) {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_5, wrapper.getTheme());
-        } else if (curLitersInSeekBar < 6) {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_6, wrapper.getTheme());
-        } else if (curLitersInSeekBar < 7) {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_7, wrapper.getTheme());
-        } else if (curLitersInSeekBar < 8) {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_8, wrapper.getTheme());
-        } else if (curLitersInSeekBar < 9) {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_9, wrapper.getTheme());
-        } else {
-            productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_basic_bottle_10, wrapper.getTheme());
+        if (department.equals("Face & Body Wash") ){
+            if (curLitersInSeekBar < 0.3) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_1, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 1) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_2, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 2) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_3, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 3) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_4, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 4) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_5, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 5) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_6, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 6) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_7, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 7) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_8, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 8) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_9, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 9) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_10, wrapper.getTheme());
+            } else {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_11, wrapper.getTheme());
+            }
+        }
+        else if (department.equals("Hand Soap") ){
+            if (curLitersInSeekBar < 0.3) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 1) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_1, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 2) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_2, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 3) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_3, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 4) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_4, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 5) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_5, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 6) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_6, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 7) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_7, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 8) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_8, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 9) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_9, wrapper.getTheme());
+            } else {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_10, wrapper.getTheme());
+            }
+        }
+        else if (department.equals("House Cleaning") ){
+            if (curLitersInSeekBar < 0.3) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 1) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_1, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 2) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_2, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 3) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_3, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 4) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_4, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 5) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_5, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 6) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_6, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 7) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_7, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 8) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_8, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 9) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_9, wrapper.getTheme());
+            } else {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_10, wrapper.getTheme());
+            }
+        }
+        else if (department.equals("Laundry") ){
+             if (curLitersInSeekBar < 1) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_1, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 2) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_2, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 3) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_3, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 4) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_4, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 5) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_5, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 6) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_6, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 7) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_7, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 8) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_8, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 9) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_9, wrapper.getTheme());
+            } else {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_10, wrapper.getTheme());
+            }
+        }
+        else {
+            if (curLitersInSeekBar < 1) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_1, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 2) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_2, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 3) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_3, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 4) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_4, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 5) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_5, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 6) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_6, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 7) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_7, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 8) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_8, wrapper.getTheme());
+            } else if (curLitersInSeekBar < 9) {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_9, wrapper.getTheme());
+            } else {
+                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_10, wrapper.getTheme());
+            }
         }
         productImage.setImageDrawable(productDrawable);
     }
