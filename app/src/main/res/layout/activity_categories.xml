@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:onClick="popHowItWorks"

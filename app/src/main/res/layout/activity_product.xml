@@ -24,11 +24,11 @@
 
     <ImageButton
         android:id="@+id/back_to_categories"
-        android:layout_width="36dp"
-        android:layout_height="33dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="26dp"
-        android:background="?attr/homeAsUpIndicator"
+        android:background="@drawable/ic_back"
         android:onClick="backToCategories"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -59,8 +59,8 @@
 
     <ImageView
         android:id="@+id/info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:onClick="popHowItWorks"
@@ -68,16 +68,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_info" />
 
-    <TextView
-        android:id="@+id/how_it_works"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="27dp"
-        android:fontFamily="@font/fira_sans_bold"
-        android:text="How it works?"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/info"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/info2"
+        android:layout_width="141dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="28dp"
+        android:onClick="popHowItWorks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_howit" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
