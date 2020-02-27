@@ -1,3 +1,4 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
 
 import android.annotation.SuppressLint;
@@ -7,31 +8,38 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.Objects;
 
-
+/**
+ * This class represents an exit message, which extends DialogFragment class. The message asks the
+ * user if he sure that he want to leave the application.
+ */
 public class ExitDialogFragment extends DialogFragment implements
-        View.OnClickListener {
+        View.OnClickListener
+{
+    /* ********* Constructors: ********* */
+    /**
+     * Default constructor.
+     */
+    public ExitDialogFragment()
+    {}
 
-    public ExitDialogFragment() {
-        // Empty constructor is required for DialogFragment
-        // Make sure not to add arguments to the constructor
-        // Use `newInstance` instead as shown below
-    }
-
+    /* ********* Functions: ********* */
+    /**
+     * Returns the fragment of the exit message dialog.
+     */
     public static ExitDialogFragment newInstance() {
-        ExitDialogFragment frag = new ExitDialogFragment();
+        ExitDialogFragment fragment = new ExitDialogFragment();
         Bundle args = new Bundle();
-        frag.setArguments(args);
-        return frag;
+        fragment.setArguments(args);
+        return fragment;
     }
 
+    /**
+     * Creates the exit message dialog and creates onClickListeners to its button.
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -48,6 +56,9 @@ public class ExitDialogFragment extends DialogFragment implements
         return builder.create();
     }
 
+    /**
+     * Implements the onClickListeners of the exit or stay buttons of exit message.
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

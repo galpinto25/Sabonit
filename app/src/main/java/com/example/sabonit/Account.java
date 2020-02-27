@@ -1,6 +1,8 @@
 /* ********* Imports: ********* */
 package com.example.sabonit;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 /**
  * This class represents a user's account, which holds all the data of the user. The operations of
  * the users with the database are based on the data stored in the account. Therefore the attribute
@@ -10,38 +12,43 @@ package com.example.sabonit;
  */
 public class Account
 {
-
     /* ********* Attributes: ********* */
     // User's name, may can be extracted from the google account
     private String name;
     // User's cart, empty when initialized
     private Cart cart;
-    //User's UID of the google account, unique value
-    private String UID;
+    //User's uid of the google account, unique value
+    private String uid;
     // The account of the user that is logged in
     private static Account currentAccount;
-
+    // Orders that was confirmed by the user
     private ConfirmedOrders confirmedOrders;
+    // Pointer of the database
+    private FirebaseFirestore db;
 
     /* ********* Constructors: ********* */
     /**
      * Default constructor
      */
     public Account()
-    {}
+    {
+        db = FirebaseFirestore.getInstance();
+
+    }
 
     /**
      * When signing up, the account is initialized for the user's data handling.
      * @param name - user's name.
-     * @param uid - user's UID.
+     * @param uid - user's uid.
      */
     public Account(String name, String uid)
     {
         this.name = name;
         this.cart = new Cart();
-        this.UID = uid;
+        this.uid = uid;
         currentAccount = this;
         confirmedOrders = new ConfirmedOrders();
+        db = FirebaseFirestore.getInstance();
     }
 
     /* ********* Getters & Setters: ********* */
@@ -98,20 +105,20 @@ public class Account
     }
 
     /**
-     * Returns the UID of the account.
+     * Returns the uid of the account.
      */
-    public String getUID()
+    public String getUid()
     {
-        return UID;
+        return uid;
     }
 
     /**
      * Sets the confirmed orders of the account.
-     * @param UID given UID.
+     * @param uid given uid.
      */
-    public void setUID(String UID)
+    public void setUid(String uid)
     {
-        this.UID = UID;
+        this.uid = uid;
     }
 
     /**
@@ -129,6 +136,23 @@ public class Account
     public void setConfirmedOrders(ConfirmedOrders confirmedOrders)
     {
         this.confirmedOrders = confirmedOrders;
+    }
+
+    /* ********* Functions: ********* */
+    /**
+     * Empty the cart of the user.
+     */
+    public void toEmptyCart()
+    {
+        this.cart = new Cart();
+    }
+
+    /**
+     * Write the account in the database.
+     */
+    public void updateAccountInDB()
+    {
+        db.collection("Accounts").document(uid).set(currentAccount);
     }
 
 }

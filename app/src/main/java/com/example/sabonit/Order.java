@@ -12,20 +12,20 @@ public class Order
     // Amount of litersTitle of product in the total product order.
     private double liters;
 
-
     /* ********* Constructors: ********* */
     /**
      * Default constructor.
      */
-    public Order() {
-    }
+    public Order()
+    {}
 
     /**
      *  Creates an order of the specified product in the given amount.
      * @param product - type of product to order
      * @param liters - amount of product to order (in shekels to liter)
      */
-    public Order(Product product, double liters) {
+    public Order(Product product, double liters)
+    {
         this.product = product;
         this.liters = liters;
     }
@@ -49,15 +49,23 @@ public class Order
         this.product.setNewBottle(isNewBottle);
     }
 
-    public Product getProduct() {
+    public Product getProduct()
+    {
         return product;
     }
 
-    public double getLiters() {
+    public double getLiters()
+    {
         return liters;
     }
 
-    public double calculatePrice() {
+    /**
+     * Calculate the price of the required amount of product that the user chose.
+     * @return the future price of this product order.
+     */
+    public double calculatePrice()
+    {
         return product.getPricePerLiter() * liters;
     }
+
 }

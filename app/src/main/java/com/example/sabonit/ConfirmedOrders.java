@@ -1,13 +1,13 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
 
 import java.util.ArrayList;
 
-public class ConfirmedOrders {
-
+public class ConfirmedOrders
+{
     /* ********* Attributes: ********* */
-    // Product to order from the Sabonit.
+    // Carts that the user ordered from the Sabonit.
     private ArrayList<Cart> carts;
-
 
     /* ********* Constructors: ********* */
     /**
@@ -28,6 +28,10 @@ public class ConfirmedOrders {
         this.carts = carts;
     }
 
+    /**
+     * Add the given cart to the confirmed orders list.
+     * @param cart - the cart that the user confirmed it's order
+     */
     public void addCart(Cart cart)
     {
         carts.add(cart);

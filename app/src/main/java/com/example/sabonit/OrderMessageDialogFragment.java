@@ -7,34 +7,34 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-
 import java.util.Objects;
 
 /**
- * This class represents an order message which extends DialogFragment class.
+ * This class represents an order message, which extends DialogFragment class. The message asks the
+ * user if he is sure that he wants to order, because it is impossible to cancel a confirmed order.
  */
 public class OrderMessageDialogFragment extends DialogFragment implements
-        android.view.View.OnClickListener {
-
+        android.view.View.OnClickListener
+{
     /* ********* Constructors: ********* */
     /**
-     * Default constructor
+     * Default constructor.
      */
     public OrderMessageDialogFragment()
     {}
 
+    /* ********* Functions: ********* */
     /**
      * Returns the fragment of the order message dialog.
      */
     public static OrderMessageDialogFragment newInstance()
     {
-        OrderMessageDialogFragment frag = new OrderMessageDialogFragment();
+        OrderMessageDialogFragment fragment = new OrderMessageDialogFragment();
         Bundle args = new Bundle();
-        frag.setArguments(args);
-        return frag;
+        fragment.setArguments(args);
+        return fragment;
     }
 
     /**
@@ -42,12 +42,14 @@ public class OrderMessageDialogFragment extends DialogFragment implements
      */
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState)
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         @SuppressLint("InflateParams") View view = Objects.requireNonNull(getActivity()).
                 getLayoutInflater().inflate(R.layout.order_message, null);
         builder.setView(view);
-        if (view != null) {
+        if (view != null)
+        {
             Button continueButton = view.findViewById(R.id.continue_button);
             continueButton.setOnClickListener(this);
             Button goBackButton = view.findViewById(R.id.go_back_button);
@@ -60,11 +62,14 @@ public class OrderMessageDialogFragment extends DialogFragment implements
      * Implements the onClickListeners of the 'continue'/'go back' buttons of order message.
      */
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
             case R.id.continue_button:
                 CartActivity callingActivity = (CartActivity) getActivity();
-                if (callingActivity != null) {
+                if (callingActivity != null)
+                {
                     callingActivity.orderItems();
                 }
                 break;

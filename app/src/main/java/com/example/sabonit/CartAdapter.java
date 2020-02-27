@@ -1,11 +1,9 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
-//******************imports*******************************/
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.text.SpannableString;
-import android.text.method.ScrollingMovementMethod;
 import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,39 +11,42 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
-//******************pizza adapter*******************************/
-
-
 /**
- * A class which represents an adapter of Pizza objects, which extends
+ * A class which represents an adapter of cart objects, which extends
  * the RecyclerView.Adapter<CartAdapter.ViewHolder> class.
  */
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-
-    // class private variables declaration:
+    /* ********* Attributes: ********* */
+    // The products that was chosen by the user
     private final List<Order> data;
+    // The surface of the products view
     private final LayoutInflater inflater;
+    // Listener of the edit button
     private ItemClickListener clickListener;
 
-    // data is passed into the constructor
+    /* ********* Constructors: ********* */
+
+    /**
+     * Default constructor, initializes the inflater and the data to put in it.
+     *
+     * @param data - the products that was chosen by the user
+     */
     CartAdapter(Context context, List<Order> data) {
         this.inflater = LayoutInflater.from(context);
         this.data = data;
     }
 
+    /* ********* Functions: ********* */
+
     /**
-     * inflates the row layout from xml when needed
+     * Inflates the row layout from xml when needed.
+     *
      * @return a new single pizza view
      */
     @NonNull
@@ -56,13 +57,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     /**
-     *  binds the data to the View objects in each row
+     * Binds the data to the View objects in each row.
      */
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // sets the product attributes of each product in the cart
         Order order = data.get(position);
+        // handles the displaying of the product's details
         holder.productTitle.setText(order.getProduct().getDepartment());
         holder.productLiters.setText("Liters: " + order.getLiters() + "L");
         holder.productSmell.setText("Scent: " + order.getProduct().getSmell());
@@ -72,7 +74,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         productPriceString.setSpan(new RelativeSizeSpan(0.8f),
                 productPriceString.length() - 1, productPriceString.length(), 0);
         holder.productPrice.setText(productPriceString);
-//        holder.bottleImage.setImageDrawable(order.getProduct().getDrawable());
     }
 
     /**
@@ -103,7 +104,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             productSmell = itemView.findViewById(R.id.product_smell);
             productPrice = itemView.findViewById(R.id.product_price);
 
-
             // finds ids of ImageButton objects
             editButton = itemView.findViewById(R.id.edit_button);
             deleteButton = itemView.findViewById(R.id.delete_button);
@@ -114,22 +114,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 //            itemView.setOnClickListener(this);
         }
 
+        /**
+         * Response on clicking on edit or delete buttons, respectively.
+         */
         @Override
         public void onClick(View view) {
-//            if (view.getId() == itemView.getId()) {
-//                Context context = view.getContext();
-//                Intent intent = new Intent(context, PizzaDetailsActivity.class);
-//                intent.putExtra("pizza_number", getAdapterPosition());
-//                context.startActivity(intent);
-//            }
-            if (view.getId() == editButton.getId())
-            {
+            if (view.getId() == editButton.getId()) {
                 if (clickListener != null) {
                     clickListener.onProductEditClick(view, getAdapterPosition());
                 }
-            }
-            else if (view.getId() == deleteButton.getId())
-            {
+            } else if (view.getId() == deleteButton.getId()) {
                 if (clickListener != null) {
                     clickListener.onProductDeleteClick(view, getAdapterPosition());
                 }
@@ -137,20 +131,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         }
     }
 
-
     /**
-     * allows clicks events to be caught
+     * Allows clicks events to be caught.
      */
-    void setClickListener(ItemClickListener itemClickListener) {
+    void setClickListener(ItemClickListener itemClickListener)
+    {
         this.clickListener = itemClickListener;
     }
 
     /**
-     * parent activity will implement this method to respond to click events
-      */
-    public interface ItemClickListener {
+     * Parent activity will implement this method to respond to click events.
+     */
+    public interface ItemClickListener
+    {
         void onProductEditClick(View view, int position);
         void onProductDeleteClick(View view, int position);
     }
 
 }
+
+

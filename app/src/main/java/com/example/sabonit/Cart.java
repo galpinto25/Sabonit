@@ -2,18 +2,15 @@
 package com.example.sabonit;
 import java.util.ArrayList;
 
-
 /**
  * This class represents the user's cart. The cart holds all the orders of the users and enables a
  * comfortable access to handle them.
  */
 public class Cart
 {
-
     /* ********* Attributes: ********* */
     // This list holds all the orders which did not got to the consumer.
     private ArrayList<Order> ordersList;
-
 
     /* ********* Constructors: ********* */
     /**
@@ -57,7 +54,8 @@ public class Cart
     public void addProductToCart(Product product, double liters)
     {
         int index = findProductIndex(product.getFullName());
-        if (index >= 0) {
+        if (index >= 0)
+        {
             double newAmount = ordersList.get(index).setLiters(liters);
             ordersList.get(index).setNewBottle(product.isNewBottle());
             if (newAmount == 0) popOrderFromCart(index);
