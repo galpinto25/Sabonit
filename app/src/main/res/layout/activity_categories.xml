@@ -49,16 +49,6 @@
             tools:layout_editor_absoluteY="21dp" />
 
         <ImageView
-            android:id="@+id/history"
-            android:layout_width="56dp"
-            android:layout_height="50dp"
-            android:paddingRight="16dp"
-            android:visibility="invisible"
-            app:srcCompat="@drawable/ic_history"
-            tools:layout_editor_absoluteX="281dp"
-            tools:layout_editor_absoluteY="21dp" />
-
-        <ImageView
             android:id="@+id/logout"
             android:layout_width="45dp"
             android:layout_height="50dp"

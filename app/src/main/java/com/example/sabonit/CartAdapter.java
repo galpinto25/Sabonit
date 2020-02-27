@@ -91,7 +91,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         final TextView productLiters;
         final TextView productSmell;
         final TextView productPrice;
-        final ImageView bottleImage;
         final ImageButton editButton;
         final ImageButton deleteButton;
 
@@ -104,8 +103,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             productSmell = itemView.findViewById(R.id.product_smell);
             productPrice = itemView.findViewById(R.id.product_price);
 
-            // finds ids of ImageView objects
-            bottleImage = itemView.findViewById(R.id.product_bottle_image);
 
             // finds ids of ImageButton objects
             editButton = itemView.findViewById(R.id.edit_button);
