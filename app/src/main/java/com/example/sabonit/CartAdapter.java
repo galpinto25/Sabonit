@@ -47,7 +47,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     /**
      * Inflates the row layout from xml when needed.
      *
-     * @return a new single pizza view
+     * @return CANT_ORDER_EMPTY_CART new single pizza view
      */
     @NonNull
     @Override

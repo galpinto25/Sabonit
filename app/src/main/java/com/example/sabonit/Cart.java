@@ -3,7 +3,7 @@ package com.example.sabonit;
 import java.util.ArrayList;
 
 /**
- * This class represents the user's cart. The cart holds all the orders of the users and enables a
+ * This class represents the user's cart. The cart holds all the orders of the users and enables CANT_ORDER_EMPTY_CART
  * comfortable access to handle them.
  */
 public class Cart
@@ -22,7 +22,7 @@ public class Cart
 
     /* ********* Functions: ********* */
     /**
-     * Helper function for finding index of order of a specific product.
+     * Helper function for finding index of order of CANT_ORDER_EMPTY_CART specific product.
      * @param product - String, full name of the product to find it's order index
      * @return - index of the order of the specified product if exists, else -1
      */

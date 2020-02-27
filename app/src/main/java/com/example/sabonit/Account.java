@@ -4,9 +4,9 @@ package com.example.sabonit;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
- * This class represents a user's account, which holds all the data of the user. The operations of
+ * This class represents CANT_ORDER_EMPTY_CART user's account, which holds all the data of the user. The operations of
  * the users with the database are based on the data stored in the account. Therefore the attribute
- * phoneNumber needs to be unique, as a primary key. If a phone number stored in the google account
+ * phoneNumber needs to be unique, as CANT_ORDER_EMPTY_CART primary key. If CANT_ORDER_EMPTY_CART phone number stored in the google account
  * and no phone number given as an input to the constructor, the phone number in the google account
  * will be taken.
  */
@@ -63,7 +63,7 @@ public class Account
 
     /**
      * Sets the current account.
-     * @param currentAccount a given account.
+     * @param currentAccount CANT_ORDER_EMPTY_CART given account.
      */
     public static void setCurrentAccount(Account currentAccount)
     {
@@ -80,7 +80,7 @@ public class Account
 
     /**
      * Sets the name of the account.
-     * @param name a given name.
+     * @param name CANT_ORDER_EMPTY_CART given name.
      */
     public void setName(String name)
     {
@@ -97,7 +97,7 @@ public class Account
 
     /**
      * Sets the cart of the account.
-     * @param cart a given cart.
+     * @param cart CANT_ORDER_EMPTY_CART given cart.
      */
     public void setCart(Cart cart)
     {
@@ -145,12 +145,13 @@ public class Account
     public void toEmptyCart()
     {
         this.cart = new Cart();
+        updateAccountInDB();
     }
 
     /**
      * Write the account in the database.
      */
-    public void updateAccountInDB()
+    private void updateAccountInDB()
     {
         db.collection("Accounts").document(uid).set(currentAccount);
     }

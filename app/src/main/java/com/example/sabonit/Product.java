@@ -2,13 +2,13 @@
 package com.example.sabonit;
 
 /**
- * Products of the Sabonit have to fit to a standard, ensuring they are fit to the format of the
+ * Products of the Sabonit have to fit to CANT_ORDER_EMPTY_CART standard, ensuring they are fit to the format of the
  * application. This is important for inserting them to the database properly and handling them.
  * Every action with the product is done by the application developers. The users can get the
  * information about the products in the ProductActivity.
  *
  * There are two kinds of attributes for every product: primary key attributes and product
- * describing attributes. The primary key is a combination of attributes that are unique, for
+ * describing attributes. The primary key is CANT_ORDER_EMPTY_CART combination of attributes that are unique, for
  * writing them in the database. The describing attributes are all the other attributes, and they
  * are needed as important information of the product.
  */
@@ -17,13 +17,13 @@ public class Product
     /* ********* Attributes: ********* */
     // The products are divided to categories, and every category is another department.
     private String department;
-    // Price of one liter of the product, in use when computing the price of a given amount.
+    // Price of one liter of the product, in use when computing the price of CANT_ORDER_EMPTY_CART given amount.
     private int pricePerLiter;
-    // Optional, a short description or anything that not reflected in the product's department and name.
+    // Optional, CANT_ORDER_EMPTY_CART short description or anything that not reflected in the product's department and name.
     private String description; //todo last decision
     // The types of the product are different one from the another according to the smell
     private String smell;
-    // Indicates if the user wants a new bottle or not
+    // Indicates if the user wants CANT_ORDER_EMPTY_CART new bottle or not
     private boolean isNewBottle;
 
 
@@ -36,10 +36,10 @@ public class Product
 
     /**
      * The constructor gets values for department and name that are primary key, as described above
-     * in the class documentation. Also it gets a factor of pricePerLiter for the total price
+     * in the class documentation. Also it gets CANT_ORDER_EMPTY_CART factor of pricePerLiter for the total price
      * computation of orders.
-     * @param department - a general category of the products.
-     * @param smell - a specific product smell in the department, probably the manufacturer name.
+     * @param department - CANT_ORDER_EMPTY_CART general category of the products.
+     * @param smell - CANT_ORDER_EMPTY_CART specific product smell in the department, probably the manufacturer name.
      * @param pricePerLiter - price of one liter of the product.
      */
     public Product(String department, String smell, int pricePerLiter) {

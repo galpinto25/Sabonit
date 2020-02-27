@@ -1,3 +1,4 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
 
 import android.content.Context;
@@ -6,97 +7,139 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
+
+/**
+ * This class represents the screen of cart, it contains list of products that user chose.
+ * from here user can submit order or add new product or edit exist product.
+ */
 public class CartActivity extends AppCompatActivity implements CartAdapter.ItemClickListener {
 
-    // class private variables declaration:
+    /* ********* Attributes: ********* */
     private RecyclerView recyclerView;
     private TextView cartDescription;
     private Cart cart;
     private ArrayList<Order> orders;
     private FirebaseFirestore db;
+    private Account currentAccount;
+
+    /* ********* Functions: ********* */
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+        drawScreen();
+        currentAccount = Account.getCurrentAccount();
+        cart = currentAccount.getCart();
+        orders = cart.getOrdersList();
+        updateRecyclerView();
+        updateCartAdapter();
+        db = FirebaseFirestore.getInstance();
+    }
+
+    /**
+     * draw itms on screen
+     */
+    private void drawScreen()
+    {
         setContentView(R.layout.activity_cart);
         cartDescription = findViewById(R.id.items_list);
-        cart = Account.getCurrentAccount().getCart();
-        orders = cart.getOrdersList();
+        printEmptyCartDescription();
+    }
+
+    /**
+     * updating the symblos on the screen
+     */
+    private void updateRecyclerView()
+    {
         recyclerView = findViewById(R.id.cart_description);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        // specifies a CartAdapter
-        updateCartAdapter();
-        db = FirebaseFirestore.getInstance();
-        printEmptyCartDescription();
-        // todo needs to implement total price function
-        // updateTotalPrice();
     }
 
-    private void updateCartAdapter() {
+    /**
+     * draw the view of the cart on the screen
+     */
+    private void updateCartAdapter()
+    {
         CartAdapter adapter = new CartAdapter(this, orders);
         recyclerView.setAdapter(adapter);
-        adapter.setClickListener(new CartAdapter.ItemClickListener() {
+        adapter.setClickListener(new CartAdapter.ItemClickListener()
+        {
             @Override
-            public void onProductEditClick(View view, int position) {
+            public void onProductEditClick(View view, int position)
+            {
                 CartActivity.this.onProductEditClick(view, position);
             }
 
             @Override
-            public void onProductDeleteClick(View view, int position) {
+            public void onProductDeleteClick(View view, int position)
+            {
                 CartActivity.this.onProductDeleteClick(view, position);
             }
         });
     }
 
-    public void backTo(View view) {
+    /**
+     * going back to the categories activity to add new product
+     */
+    public void addNewProductClick(View view)
+    {
         onBackPressed();
     }
 
-    public void printEmptyCartDescription() {
-        StringBuilder ordersDescription = new StringBuilder("Your cart is\n empty...\n\uD83D\uDE44");
-        cartDescription.setText(ordersDescription);
-    }
-
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * print CANT_ORDER_EMPTY_CART message if the cart is empty
+     */
+    public void printEmptyCartDescription()
+    {
+        StringBuilder ordersDescription = new StringBuilder(Utils.YOUR_CART_IS_EMPTY);
+        cartDescription.setText(ordersDescription);
+    }
+
     @Override
-    public void onProductEditClick(View view, int position) {
+    public void onProductEditClick(View view, int position)
+    {
         Intent intent = new Intent(this, ProductActivity.class);
         intent.putExtra("Department", orders.get(position).getProduct().getDepartment());
         startActivity(intent);
     }
 
     @Override
-    public void onProductDeleteClick(View view, int position) {
+    public void onProductDeleteClick(View view, int position)
+    {
         cart.getOrdersList().remove(position);
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         db.collection("Accounts").document(uid).update("cart", cart);
         updateCartAdapter();
     }
 
-    public void goToOrder(View view) {
+    /**
+     * after click order the user confirmed the products
+     */
+    public void goToOrder(View view)
+    {
         if (cart.isCartEmpty())
         {
             Context context = getApplicationContext();
-            CharSequence text = "You can't order empty cart";
+            CharSequence text = Utils.CANT_ORDER_EMPTY_CART;
             int duration = Toast.LENGTH_LONG;
 
             Toast toast = Toast.makeText(context, text, duration);
@@ -107,30 +150,36 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
         }
     }
 
-    public void orderItems() {
+    /**
+     * when user commit and order we update his order in the db
+     */
+    public void orderItems()
+    {
         if (cart.isCartEmpty())
         {
             Context context = getApplicationContext();
-            CharSequence text = "You can't order empty cart";
+            CharSequence text = Utils.CANT_ORDER_EMPTY_CART;
             int duration = Toast.LENGTH_LONG;
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
             return;
         }
-        Account.getCurrentAccount().getConfirmedOrders().addCart(cart);
-        Account.getCurrentAccount().setCart(new Cart());
-        String uid = Account.getCurrentAccount().getUid();
-        db.collection("Accounts").document(uid).set(Account.getCurrentAccount());
+        currentAccount.getConfirmedOrders().addCart(cart);
+        currentAccount.toEmptyCart();
         Intent intent = new Intent(this, OrderActivity.class);
         startActivity(intent);
     }
 
-    private void showHowItWorksDialog() {
+    /**
+     * if user press how it works we display the fit dialog
+     */
+    private void showHowItWorksDialog()
+    {
         FragmentManager fm = getSupportFragmentManager();
         OrderMessageDialogFragment orderMessageDialogFragment =
                 OrderMessageDialogFragment.newInstance();
-        orderMessageDialogFragment.show(fm, "order_message");
+        orderMessageDialogFragment.show(fm, Utils.ORDER_MESSAGE);
     }
 
 }

@@ -85,7 +85,7 @@ public class UserLoginActivity extends AppCompatActivity
     }
 
     /**
-     * Creates a sign in intent with Google authentication.
+     * Creates CANT_ORDER_EMPTY_CART sign in intent with Google authentication.
      */
     private void createSignInIntent()
     {
@@ -134,7 +134,7 @@ public class UserLoginActivity extends AppCompatActivity
 
     /**
      * After the successful sign in this function updates the account in the database, if it exists.
-     * else, creates a new account in the database.
+     * else, creates CANT_ORDER_EMPTY_CART new account in the database.
      */
     private void updateAccount()
     {
@@ -180,7 +180,7 @@ public class UserLoginActivity extends AppCompatActivity
     }
 
     /**
-     * Writes a new account in the databases, using the name and uid that was extracted earlier in
+     * Writes CANT_ORDER_EMPTY_CART new account in the databases, using the name and uid that was extracted earlier in
      * the login process.
      */
     private void writeNewAccount()
@@ -280,7 +280,7 @@ public class UserLoginActivity extends AppCompatActivity
     }
 
     /**
-     * This function responsible for showing a message about a non finished order.
+     * This function responsible for showing CANT_ORDER_EMPTY_CART message about CANT_ORDER_EMPTY_CART non finished order.
      * The message shown only when the user's cart is not empty.
      */
     private void popCartIsntEmptyDialog()

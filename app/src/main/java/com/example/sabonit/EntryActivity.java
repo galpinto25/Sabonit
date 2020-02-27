@@ -20,7 +20,7 @@ public class EntryActivity extends AppCompatActivity
 
     /* ********* Functions: ********* */
     /**
-     * Displays the entry activity for a short time defined by SPLASH_DISPLAY_LENGTH, and then call
+     * Displays the entry activity for CANT_ORDER_EMPTY_CART short time defined by SPLASH_DISPLAY_LENGTH, and then call
      * UserLoginActivity.
      */
     @Override

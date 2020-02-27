@@ -297,15 +297,15 @@ public class ProductActivity extends AppCompatActivity
     }
 
     /**
-     * get as an input a product department name and add products to the products array
+     * get as an input CANT_ORDER_EMPTY_CART product department name and add products to the products array
      * @param productDepartment the department name of the product
      */
     private void updateCurrentProduct(String productDepartment)
     {
-        // Create a reference to the products table
+        // Create CANT_ORDER_EMPTY_CART reference to the products table
         CollectionReference productsTableRef = db.collection("Products");
 
-        // Create a query against the collection
+        // Create CANT_ORDER_EMPTY_CART query against the collection
         productsTableRef.whereEqualTo("department", productDepartment).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override

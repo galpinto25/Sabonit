@@ -13,7 +13,7 @@ import java.util.Objects;
 
 /**
  * This class represents an order message, which extends DialogFragment class. The message asks the
- * user if he is sure that he wants to order, because it is impossible to cancel a confirmed order.
+ * user if he is sure that he wants to order, because it is impossible to cancel CANT_ORDER_EMPTY_CART confirmed order.
  */
 public class OrderMessageDialogFragment extends DialogFragment implements
         android.view.View.OnClickListener

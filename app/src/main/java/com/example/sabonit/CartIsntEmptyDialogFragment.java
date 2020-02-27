@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Objects;
 
 /**
- * This class represents a message about an order that was not finished, which extends
+ * This class represents CANT_ORDER_EMPTY_CART message about an order that was not finished, which extends
  * DialogFragment class. The message asks the user if wants to finish the last order or to nullify
  * it.
  */
@@ -74,7 +74,6 @@ public class CartIsntEmptyDialogFragment extends DialogFragment implements
             case R.id.cancel_order_button:
                 Account currentAccount = Account.getCurrentAccount();
                 currentAccount.toEmptyCart();
-                currentAccount.updateAccountInDB();
                 dismiss();
                 break;
             case R.id.go_to_cart_button:
