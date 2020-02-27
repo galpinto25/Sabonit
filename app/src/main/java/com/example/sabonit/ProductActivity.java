@@ -27,17 +27,15 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.Objects;
 import maes.tech.intentanim.CustomIntent;
 
+/**
+ *  This class represents the screen of product
+ */
 public class ProductActivity extends AppCompatActivity
 {
-    TextView productName;
-    TextView productDescription;
-    TextView litersTitle;
-    TextView departmentTitle;
-    ImageView productImage;
-    String department;
 
     // Pointer of the database
     private FirebaseFirestore db;
@@ -50,6 +48,10 @@ public class ProductActivity extends AppCompatActivity
     private RadioGroup radioSmellGroup;
     private int bottleColor = R.style.ColorRoses;
     private double oldLitters = 0;
+    private String department;
+
+    TextView productName, productDescription, litersTitle, departmentTitle;
+    ImageView productImage;
 
     /* ********* Functions: ********* */
     @SuppressLint("SetTextI18n")
@@ -58,23 +60,21 @@ public class ProductActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-        departmentTitle = findViewById(R.id.cart_title);
-        productName = findViewById(R.id.product_name);
-        productDescription = findViewById(R.id.description);
-        litersTitle = findViewById(R.id.liters);
-        productImage = findViewById(R.id.product_image);
-        literSeekBar = findViewById(R.id.liter_seek_bar);
-        radioSmellGroup = findViewById(R.id.smell_options);
-        radioSmellGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                changeSmell();
-            }
-        });
-        Bundle bundle = getIntent().getExtras();
+        defineButtons();
+        defineRadio();
         db = FirebaseFirestore.getInstance();
         // default value when initializing the seek bar
         initialProgress = 1;
+        defineDepartment();
+        defineSeekBar();
+    }
+
+    /**
+     * helper function, define department variable
+     */
+    private void defineDepartment()
+    {
+        Bundle bundle = getIntent().getExtras();
         if (bundle != null)
         {
             department = bundle.getString("Department");
@@ -82,6 +82,13 @@ public class ProductActivity extends AppCompatActivity
         }
         currentProduct = null;
         updateCurrentProduct(department);
+    }
+
+    /**
+     * helper function, define seekBar variable
+     */
+    private void defineSeekBar()
+    {
         literSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
             @Override
@@ -103,135 +110,82 @@ public class ProductActivity extends AppCompatActivity
             }
         });
         literSeekBar.setProgress(initialProgress);
-//        fillBottle(0, bottleColor);
     }
 
+    /**
+     * helper function, define radio variable
+     */
+    private void defineRadio()
+    {
+        radioSmellGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                changeSmell();
+            }
+        });
+    }
+
+    /**
+     * helper function, define radio variable
+     */
+    private void defineButtons()
+    {
+        departmentTitle = findViewById(R.id.cart_title);
+        productName = findViewById(R.id.product_name);
+        productDescription = findViewById(R.id.description);
+        litersTitle = findViewById(R.id.liters);
+        productImage = findViewById(R.id.product_image);
+        literSeekBar = findViewById(R.id.liter_seek_bar);
+        radioSmellGroup = findViewById(R.id.smell_options);
+    }
+
+    /**
+     * draw fill bottle accroding to the current liters
+     * @param curLitersInSeekBar current liters
+     * @param color of the bottle
+     */
     private void fillBottle(double curLitersInSeekBar, int color)
     {
         Drawable productDrawable;
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, color);
-        if (department.equals("Face & Body Wash") ){
-            if (curLitersInSeekBar < 0.3) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_1, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 1) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_2, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 2) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_3, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 3) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_4, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 4) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_5, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 5) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_6, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 6) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_7, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 7) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_8, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 8) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_9, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 9) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_10, wrapper.getTheme());
-            } else {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_body_soap_new_11, wrapper.getTheme());
-            }
-        }
-        else if (department.equals("Hand Soap") ){
-            if (curLitersInSeekBar < 0.3) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 1) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_1, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 2) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_2, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 3) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_3, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 4) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_4, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 5) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_5, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 6) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_6, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 7) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_7, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 8) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_8, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 9) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_9, wrapper.getTheme());
-            } else {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hand_soap_new_10, wrapper.getTheme());
-            }
-        }
-        else if (department.equals("House Cleaning") ){
-            if (curLitersInSeekBar < 0.3) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 1) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_1, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 2) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_2, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 3) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_3, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 4) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_4, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 5) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_5, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 6) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_6, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 7) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_7, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 8) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_8, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 9) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_9, wrapper.getTheme());
-            } else {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_house_cleaning_new_10, wrapper.getTheme());
-            }
-        }
-        else if (department.equals("Laundry") ){
-             if (curLitersInSeekBar < 1) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_1, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 2) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_2, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 3) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_3, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 4) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_4, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 5) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_5, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 6) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_6, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 7) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_7, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 8) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_8, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 9) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_9, wrapper.getTheme());
-            } else {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_laundry_new_10, wrapper.getTheme());
-            }
-        }
-        else {
-            if (curLitersInSeekBar < 1) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_1, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 2) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_2, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 3) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_3, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 4) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_4, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 5) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_5, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 6) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_6, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 7) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_7, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 8) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_8, wrapper.getTheme());
-            } else if (curLitersInSeekBar < 9) {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_9, wrapper.getTheme());
-            } else {
-                productDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dishwashing_new_10, wrapper.getTheme());
-            }
+
+        switch (department)
+        {
+            case "Face & Body Wash":
+                productDrawable = fillBottleHelper(Utils.bodyXMLS, curLitersInSeekBar, wrapper);
+                break;
+            case "Hand Soap":
+                productDrawable = fillBottleHelper(Utils.handsXMLS, curLitersInSeekBar, wrapper);
+                break;
+            case "House Cleaning":
+                productDrawable = fillBottleHelper(Utils.houseCleaningXMLS, curLitersInSeekBar, wrapper);
+                break;
+            case "Laundry":
+                productDrawable = fillBottleHelper(Utils.laundryXMLS, curLitersInSeekBar, wrapper);
+                break;
+            default:
+                productDrawable = fillBottleHelper(Utils.dishwashingXMLS, curLitersInSeekBar, wrapper);
         }
         productImage.setImageDrawable(productDrawable);
+    }
+
+    /**
+     * helper funtion to the above
+     * @param xmls all the bottles fill that possible
+     * @param curLitersInSeekBar current liters of the products
+     * @param wrapper of the seekbar
+     * @return
+     */
+    private Drawable fillBottleHelper(int[] xmls, double curLitersInSeekBar, ContextThemeWrapper wrapper)
+    {
+        for (int i = 1; i <= 10; i++)
+        {
+            if (curLitersInSeekBar < i)
+            {
+                return ResourcesCompat.getDrawable(getResources(), xmls[i - 1], wrapper.getTheme());
+            }
+        }
+        return ResourcesCompat.getDrawable(getResources(), xmls[xmls.length - 1], wrapper.getTheme());
     }
 
     /**
@@ -256,9 +210,14 @@ public class ProductActivity extends AppCompatActivity
         updateCheckBoxNewBottle();
     }
 
+    /**
+     * after user choose smell, update the radio button
+     * @param smell the smell that the user chose
+     */
     private void updateSmellRadioButton(String smell)
     {
-        switch (smell) {
+        switch (smell)
+        {
             case "Roses":
                 radioSmellGroup.check(R.id.radioButtonRoses);
                 break;
@@ -271,13 +230,20 @@ public class ProductActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * drawing the product
+     */
     private void displayProduct()
     {
         productName.setText(currentProduct.getFullName());
         productDescription.setText(currentProduct.getDescription());
     }
 
-    public void backToCategories(View view) {
+    /**
+     * onClick function on back button
+     */
+    public void backToCategories(View view)
+    {
         onBackPressed();
     }
 
@@ -289,15 +255,8 @@ public class ProductActivity extends AppCompatActivity
         CustomIntent.customType(this, "right-to-left");
     }
 
-    public void logout(View view)
-    {
-        Intent intent = new Intent(this, UserLoginActivity.class);
-        intent.putExtra("Logout", 0);
-        startActivity(intent);
-    }
-
     /**
-     * get as an input CANT_ORDER_EMPTY_CART product department name and add products to the products array
+     * check if the user chose this department earlier
      * @param productDepartment the department name of the product
      */
     private void updateCurrentProduct(String productDepartment)
@@ -327,6 +286,9 @@ public class ProductActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * onClick function helper when user click on checkBox of new bottle
+     */
     private void updateCheckBoxNewBottle()
     {
         if (currentProduct.isNewBottle())
@@ -335,12 +297,27 @@ public class ProductActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * onClick function when user click on checkBox of new bottle
+     */
+    public void onCheckboxClicked(View view)
+    {
+        boolean checked = ((CheckBox) view).isChecked();
+        updateNewBottle(checked);
+    }
+
+    /**
+     * onClick function when user click on cart button
+     */
     public void goToCart(View view)
     {
         Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * onClick function when user click on add to cart button
+     */
     public void addProductToCart(View view)
     {
         if(currentProductLiters == 0)
@@ -353,19 +330,17 @@ public class ProductActivity extends AppCompatActivity
             toast.show();
             return;
         }
-        Account account = Account.getCurrentAccount();
-        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        account.getCart().addProductToCart(currentProduct, currentProductLiters);
-        db.collection("Accounts").document(uid).update("cart", account.getCart());
+        Account currentAccount = Account.getCurrentAccount();
+        String uid = currentAccount.getUid();
+        currentAccount.getCart().addProductToCart(currentProduct, currentProductLiters);
+        db.collection("Accounts").document(uid).update("cart", currentAccount.getCart());
         goToCart(view);
     }
 
-    public void onCheckboxClicked(View view)
-    {
-        boolean checked = ((CheckBox) view).isChecked();
-        updateNewBottle(checked);
-    }
-
+    /**
+     * update checkBox and product when choose new bottle or cancel it
+     * @param checked if the checkbox is checked or not
+     */
     @SuppressLint("SetTextI18n")
     private void updateNewBottle(boolean checked)
     {
@@ -392,6 +367,9 @@ public class ProductActivity extends AppCompatActivity
         literSeekBar.setProgress((int) (currentProductLiters * 10));
     }
 
+    /**
+     * onClick function helper when user change the smell
+     */
     public void changeSmell()
     {
         // get selected radio button from radioGroup

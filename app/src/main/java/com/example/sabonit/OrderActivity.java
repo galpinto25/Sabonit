@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
+/**
+ *  This class represents the screen of submitted order
+ */
 public class OrderActivity extends AppCompatActivity
 {
     /* ********* Functions: ********* */
@@ -40,6 +43,9 @@ public class OrderActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    /**
+     * running the gif of confirmation
+     */
     private void runConfirmationGif()
     {
         ImageView refillImage = findViewById(R.id.order_gif_image);
@@ -49,6 +55,9 @@ public class OrderActivity extends AppCompatActivity
                 .into(refillImage);
     }
 
+    /**
+     * running gif of confrimation
+     */
     private void runDropGif()
     {
         ImageView refillImage = findViewById(R.id.drop_gif_image);
@@ -58,6 +67,9 @@ public class OrderActivity extends AppCompatActivity
                 .into(refillImage);
     }
 
+    /**
+     * onClick function for start new order button
+     */
     public void goToCategories(View view)
     {
         Intent intent = new Intent(this, CategoriesActivity.class);

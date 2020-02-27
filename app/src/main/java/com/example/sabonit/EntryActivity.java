@@ -34,6 +34,9 @@ public class EntryActivity extends AppCompatActivity
         goToUserLoginActivity();
     }
 
+    /**
+     * when user wants to log in, helper function
+     */
     private void goToUserLoginActivity()
     {
         // New Handler to start the account activity and close this Splash-Screen after short time.
