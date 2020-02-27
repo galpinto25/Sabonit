@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 
 /**
@@ -16,10 +14,11 @@ import com.bumptech.glide.Glide;
 public class EntryActivity extends AppCompatActivity
 {
 
-    /* ********* Attributes: ********* */
+    /* ********* Constants: ********* */
     // Fix entry activity display time length
     int SPLASH_DISPLAY_LENGTH = 3500;
 
+    /* ********* Functions: ********* */
     /**
      * Displays the entry activity for a short time defined by SPLASH_DISPLAY_LENGTH, and then call
      * UserLoginActivity.

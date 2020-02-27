@@ -11,11 +11,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-
 import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +24,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -36,19 +33,23 @@ import java.util.Objects;
  */
 public class UserLoginActivity extends AppCompatActivity
 {
-
-    /* ********* Attributes: ********* */
+    /* ********* Constants: ********* */
     // Arbitrary value for the login launching
     private static final int RC_SIGN_IN = 123;
+
+    // Pointer of the database
+    private FirebaseFirestore db;
+
+    /* ********* Attributes: ********* */
     // Indicates if there is no logged in user, for choosing if start the login process
     private boolean loginState = false;
-    private FirebaseFirestore db;
     private TextView helloTitle;
     private ImageView profileImage;
     private Button continueLogin;
     private String name;
     private String uid;
 
+    /* ********* Functions: ********* */
     /**
      * Displays the user login activity.
      */
@@ -113,7 +114,8 @@ public class UserLoginActivity extends AppCompatActivity
         if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK)
         {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user != null) {
+            if (user != null)
+            {
                 // name, email address, and profile photo Url
                 name = user.getDisplayName();
                 String email = user.getEmail();
