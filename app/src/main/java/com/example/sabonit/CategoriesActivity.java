@@ -2,42 +2,38 @@
 package com.example.sabonit;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import java.util.Objects;
 import maes.tech.intentanim.CustomIntent;
 
+/**
+ * This class represents the screen of categories
+ */
 public class CategoriesActivity extends AppCompatActivity
 {
-    // Pointer of the database
-    private FirebaseFirestore db;
 
     /* ********* Functions: ********* */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        //TODO get current account, from it take the cart, from carts take order list,
+        // if in order list there is product name "laundry" for example. make it gray
+        // (exist in the xmls), the gray symbol is still clickable like earlier - the user will edit the exit product
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
-        db = FirebaseFirestore.getInstance();
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         showExitDialog();
     }
 
+    /**
+     * onClick function for the department that the user choose
+     */
     public void intentDepartment(View view)
     {
         Intent intent = new Intent(this, ProductActivity.class);
@@ -66,63 +62,22 @@ public class CategoriesActivity extends AppCompatActivity
     }
 
     /**
-     * Writes new account in the db, in Accounts table.
-     * @param userId - or ID from google account or an ID that the user write
-     * @param accountToAdd - the user's new account to add to the db
+     * onClick function when the user choose to go to cart
      */
-    private void writeNewAccount(String userId, Account accountToAdd)
-    {
-        db.collection("Accounts").document(userId).set(accountToAdd);
-    }
-
-    private void findProductByName(String productDepartment,String productName)
-    {
-        Product requestedProduct;
-        // Create a reference to the products table
-        CollectionReference productsTableRef = db.collection("Products");
-
-        // Create a query against the collection
-        productsTableRef.whereEqualTo("department", productDepartment).
-                whereEqualTo("name", productName).get()
-
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful())
-                        {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult()))
-                            {
-                                Log.d("product from query", document.getId() + " => " + document.getData());
-//                                requestedProduct = document.toObject(Product.class);
-                            }
-                        } else {
-                            Log.d("", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-    }
-
-    public void logout(View view)
-    {
-        Intent intent = new Intent(this, UserLoginActivity.class);
-        intent.putExtra("Logout", 0);
-        startActivity(intent);
-    }
-
     public void goToCart(View view)
     {
+        changeCartButtonToRed();
         Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
     }
 
-    private void showHowItWorksDialog()
-    {
-        FragmentManager fm = getSupportFragmentManager();
-        HowItWorksDialogFragment howItWorksDialogFragment = HowItWorksDialogFragment.newInstance();
-        howItWorksDialogFragment.show(fm, "how_it_works");
+    private void changeCartButtonToRed()
+    { //TODO
     }
 
+    /**
+     * onClick function when user click backpressed of the device to exit
+     */
     private void showExitDialog()
     {
         FragmentManager fm = getSupportFragmentManager();
@@ -130,7 +85,21 @@ public class CategoriesActivity extends AppCompatActivity
         exitDialogFragment.show(fm, "exit_message");
     }
 
-    public void popHowItWorks(View view) {
+    /**
+     * onClick function helper when user wants the how it works dialog
+     */
+    private void showHowItWorksDialog()
+    {
+        FragmentManager fm = getSupportFragmentManager();
+        HowItWorksDialogFragment howItWorksDialogFragment = HowItWorksDialogFragment.newInstance();
+        howItWorksDialogFragment.show(fm, "how_it_works");
+    }
+
+    /**
+     * onClick function when user wants the how it works dialog
+     */
+    public void popHowItWorks(View view)
+    {
         showHowItWorksDialog();
     }
 

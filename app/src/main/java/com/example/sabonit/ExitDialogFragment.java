@@ -30,7 +30,8 @@ public class ExitDialogFragment extends DialogFragment implements
     /**
      * Returns the fragment of the exit message dialog.
      */
-    public static ExitDialogFragment newInstance() {
+    public static ExitDialogFragment newInstance()
+    {
         ExitDialogFragment fragment = new ExitDialogFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -42,7 +43,8 @@ public class ExitDialogFragment extends DialogFragment implements
      */
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState)
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         @SuppressLint("InflateParams") View view = Objects.requireNonNull(getActivity()).
                 getLayoutInflater().inflate(R.layout.exit_message, null);
@@ -60,8 +62,10 @@ public class ExitDialogFragment extends DialogFragment implements
      * Implements the onClickListeners of the exit or stay buttons of exit message.
      */
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
             case R.id.exit_button:
                 Activity callingActivity = getActivity();
                 if (callingActivity != null) {

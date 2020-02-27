@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * This class represents the user login activity.
+ * This class represents the user login screen.
  */
 public class UserLoginActivity extends AppCompatActivity
 {
@@ -58,18 +58,33 @@ public class UserLoginActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        defineButtons();
+        Bundle bundle = getIntent().getExtras();
+        db = FirebaseFirestore.getInstance();
+        if (bundle == null)
+        {
+            createSignInIntent();
+        }
+        doAnimation();
+    }
+
+    /**
+     * defining the buttons of the function
+     */
+    private void defineButtons()
+    {
         setContentView(R.layout.activity_user_login);
         helloTitle = findViewById(R.id.hello_text);
         profileImage = findViewById(R.id.profile_image);
         continueLogin = findViewById(R.id.continue_or_login);
         continueLogin.setText("Continue");
-        Bundle bundle = getIntent().getExtras();
-        db = FirebaseFirestore.getInstance(); // todo access to db via utils
-        if (bundle == null)
-        {
-            createSignInIntent();
-        }
+    }
 
+    /**
+     * doing the animation of the drop gif
+     */
+    private void doAnimation()
+    {
         // Presents the water drop gif on the screen and animate it to walk
         ImageView refillImage = findViewById(R.id.userlogin_gif_image);
         Glide.with(this)
@@ -85,7 +100,7 @@ public class UserLoginActivity extends AppCompatActivity
     }
 
     /**
-     * Creates CANT_ORDER_EMPTY_CART sign in intent with Google authentication.
+     * sign in intent with Google authentication.
      */
     private void createSignInIntent()
     {
@@ -134,11 +149,11 @@ public class UserLoginActivity extends AppCompatActivity
 
     /**
      * After the successful sign in this function updates the account in the database, if it exists.
-     * else, creates CANT_ORDER_EMPTY_CART new account in the database.
+     * else, creates new account in the database.
      */
     private void updateAccount()
     {
-        //
+
         DocumentReference accountsReference = db.collection("Accounts").document(uid);
         accountsReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
         {
@@ -248,10 +263,11 @@ public class UserLoginActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * helper function to how it works popup
+     */
     private void displayHowItWorksDialog()
     {
-        // todo utils 1
-
         // creates the FragmentManager object
         FragmentManager fm = getSupportFragmentManager();
         HowItWorksDialogFragment howItWorksDialogFragment = HowItWorksDialogFragment.newInstance();
@@ -267,10 +283,11 @@ public class UserLoginActivity extends AppCompatActivity
         displayHowItWorksDialog();
     }
 
+    /**
+     * helper function to pop a msg when cart is not empty
+     */
     private void displayMessageIfCartIsEmpty()
     {
-        //todo utils 1
-
         // creates the FragmentManager object
         FragmentManager fm = getSupportFragmentManager();
         CartIsntEmptyDialogFragment cartIsntEmptyDialogFragment =
@@ -280,7 +297,8 @@ public class UserLoginActivity extends AppCompatActivity
     }
 
     /**
-     * This function responsible for showing CANT_ORDER_EMPTY_CART message about CANT_ORDER_EMPTY_CART non finished order.
+     * display msg when the cart of the user is not empty so he can choose what to do
+     * (order or cancel or edit)
      * The message shown only when the user's cart is not empty.
      */
     private void popCartIsntEmptyDialog()

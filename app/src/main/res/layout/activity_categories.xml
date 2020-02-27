@@ -48,16 +48,6 @@
             tools:layout_editor_absoluteX="222dp"
             tools:layout_editor_absoluteY="21dp" />
 
-        <ImageView
-            android:id="@+id/logout"
-            android:layout_width="45dp"
-            android:layout_height="50dp"
-            android:onClick="logout"
-            android:visibility="invisible"
-            app:srcCompat="@drawable/ic_logout"
-            tools:layout_editor_absoluteX="340dp"
-            tools:layout_editor_absoluteY="21dp" />
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
