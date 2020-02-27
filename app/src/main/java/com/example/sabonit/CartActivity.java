@@ -120,7 +120,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
         }
         Account.getCurrentAccount().getConfirmedOrders().addCart(cart);
         Account.getCurrentAccount().setCart(new Cart());
-        String uid = Account.getCurrentAccount().getUID();
+        String uid = Account.getCurrentAccount().getUid();
         db.collection("Accounts").document(uid).set(Account.getCurrentAccount());
         Intent intent = new Intent(this, OrderActivity.class);
         startActivity(intent);

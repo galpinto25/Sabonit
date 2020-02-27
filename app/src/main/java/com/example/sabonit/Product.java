@@ -21,9 +21,9 @@ public class Product
     private int pricePerLiter;
     // Optional, a short description or anything that not reflected in the product's department and name.
     private String description; //todo last decision
-    //
+    // The types of the product are different one from the another according to the smell
     private String smell;
-    //
+    // Indicates if the user wants a new bottle or not
     private boolean isNewBottle;
 
 

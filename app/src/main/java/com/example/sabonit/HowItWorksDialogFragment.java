@@ -1,46 +1,58 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-
 import com.bumptech.glide.Glide;
-
 import java.util.Objects;
 
+/**
+ * This class represents an "how it works" message, which extends DialogFragment class. The message
+ * explains the idea of the Sabonit and what the user needs to do for getting the Sabonit service.
+ */
 public class HowItWorksDialogFragment extends DialogFragment  implements
-        android.view.View.OnClickListener {
+        android.view.View.OnClickListener
+{
+    /* ********* Constructors: ********* */
+    /**
+     * Default constructor.
+     */
+    public HowItWorksDialogFragment()
+    {}
 
-    public HowItWorksDialogFragment() {
-        // Empty constructor is required for DialogFragment
-        // Make sure not to add arguments to the constructor
-        // Use `newInstance` instead as shown below
-    }
-
-    public static HowItWorksDialogFragment newInstance() {
-        HowItWorksDialogFragment frag = new HowItWorksDialogFragment();
+    /* ********* Functions: ********* */
+    /**
+     * Returns the fragment of the "how it works" message dialog.
+     */
+    public static HowItWorksDialogFragment newInstance()
+    {
+        HowItWorksDialogFragment fragment = new HowItWorksDialogFragment();
         Bundle args = new Bundle();
-        frag.setArguments(args);
-        return frag;
+        fragment.setArguments(args);
+        return fragment;
     }
 
+    /**
+     * Creates the "how it works" message dialog and creates onClickListeners to its button.
+     */
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState)
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         @SuppressLint("InflateParams") View view = Objects.requireNonNull(getActivity()).
                 getLayoutInflater().inflate(R.layout.how_it_works, null);
         builder.setView(view);
-        if (view != null) {
+        if (view != null)
+        {
+            // handles the gif displaying
             ImageView refillImage = view.findViewById(R.id.gif_image);
             Glide.with(this)
                     .load("https://www.functionofbeauty.com/images/bottle-filling-up.gif")
@@ -51,9 +63,14 @@ public class HowItWorksDialogFragment extends DialogFragment  implements
         return builder.create();
     }
 
+    /**
+     * Implements the onClickListeners of the 'got it' button of "how it works" message.
+     */
     @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.got_it_button) {
+    public void onClick(View view)
+    {
+        if (view.getId() == R.id.got_it_button)
+        {
             dismiss();
         }
         dismiss();
