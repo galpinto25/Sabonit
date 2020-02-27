@@ -1,3 +1,4 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
 
 import android.content.Intent;
@@ -5,31 +6,28 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.Objects;
-
 import maes.tech.intentanim.CustomIntent;
 
-public class CategoriesActivity extends AppCompatActivity {
-
-    // todo: All the next code suppose to move to the relevant place (another activity)
-    //this is our db that contains all the information of the app
+public class CategoriesActivity extends AppCompatActivity
+{
+    // Pointer of the database
     private FirebaseFirestore db;
 
+    /* ********* Functions: ********* */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
         db = FirebaseFirestore.getInstance();
@@ -40,9 +38,11 @@ public class CategoriesActivity extends AppCompatActivity {
         showExitDialog();
     }
 
-    public void intentDepartment(View view) {
+    public void intentDepartment(View view)
+    {
         Intent intent = new Intent(this, ProductActivity.class);
-        switch (view.getId()) {
+        switch (view.getId())
+        {
             case R.id.face_body_wash:
                 intent.putExtra("Department", "Face & Body Wash");
                 break;
@@ -89,7 +89,8 @@ public class CategoriesActivity extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
+                        if (task.isSuccessful())
+                        {
                             for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult()))
                             {
                                 Log.d("product from query", document.getId() + " => " + document.getData());
@@ -102,24 +103,28 @@ public class CategoriesActivity extends AppCompatActivity {
                 });
     }
 
-    public void logout(View view) {
+    public void logout(View view)
+    {
         Intent intent = new Intent(this, UserLoginActivity.class);
         intent.putExtra("Logout", 0);
         startActivity(intent);
     }
 
-    public void goToCart(View view) {
+    public void goToCart(View view)
+    {
         Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
     }
 
-    private void showHowItWorksDialog() {
+    private void showHowItWorksDialog()
+    {
         FragmentManager fm = getSupportFragmentManager();
         HowItWorksDialogFragment howItWorksDialogFragment = HowItWorksDialogFragment.newInstance();
         howItWorksDialogFragment.show(fm, "how_it_works");
     }
 
-    private void showExitDialog() {
+    private void showExitDialog()
+    {
         FragmentManager fm = getSupportFragmentManager();
         ExitDialogFragment exitDialogFragment = ExitDialogFragment.newInstance();
         exitDialogFragment.show(fm, "exit_message");

@@ -1,3 +1,4 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
 
 import androidx.annotation.NonNull;
@@ -5,24 +6,20 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.res.ResourcesCompat;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,24 +27,22 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.Objects;
-
 import maes.tech.intentanim.CustomIntent;
 
-public class ProductActivity extends AppCompatActivity {
-
-    TextView departmentTitle;
+public class ProductActivity extends AppCompatActivity
+{
     TextView productName;
     TextView productDescription;
     TextView litersTitle;
+    TextView departmentTitle;
     ImageView productImage;
     String department;
-    //this is our db that contains all the information of the app
+
+    // Pointer of the database
     private FirebaseFirestore db;
+
+    /* ********* Attributes: ********* */
     private Product currentProduct;
     private double currentProductLiters;
     private int initialProgress;
@@ -56,11 +51,11 @@ public class ProductActivity extends AppCompatActivity {
     private int bottleColor = R.style.ColorRoses;
     private double oldLitters = 0;
 
-//    private Map<String, ArrayList<Drawable>> xml_map= new ArrayMap<>();
-
+    /* ********* Functions: ********* */
     @SuppressLint("SetTextI18n")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         departmentTitle = findViewById(R.id.cart_title);
@@ -87,24 +82,23 @@ public class ProductActivity extends AppCompatActivity {
         }
         currentProduct = null;
         updateCurrentProduct(department);
-        literSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
-
+        literSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // TODO Auto-generated method stub
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+            {
                 double numLiters = progress / 10.0;
                 litersTitle.setText(String.valueOf(numLiters) + "L");
                 fillBottle(numLiters, bottleColor);
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-            }
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {}
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {
                 currentProductLiters = seekBar.getProgress() / 10.0;
             }
         });
@@ -112,7 +106,8 @@ public class ProductActivity extends AppCompatActivity {
 //        fillBottle(0, bottleColor);
     }
 
-    private void fillBottle(double curLitersInSeekBar, int color) {
+    private void fillBottle(double curLitersInSeekBar, int color)
+    {
         Drawable productDrawable;
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, color);
         if (department.equals("Face & Body Wash") ){
@@ -261,7 +256,8 @@ public class ProductActivity extends AppCompatActivity {
         updateCheckBoxNewBottle();
     }
 
-    private void updateSmellRadioButton(String smell) {
+    private void updateSmellRadioButton(String smell)
+    {
         switch (smell) {
             case "Roses":
                 radioSmellGroup.check(R.id.radioButtonRoses);
@@ -275,7 +271,8 @@ public class ProductActivity extends AppCompatActivity {
         }
     }
 
-    private void displayProduct() {
+    private void displayProduct()
+    {
         productName.setText(currentProduct.getFullName());
         productDescription.setText(currentProduct.getDescription());
     }
@@ -285,13 +282,15 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
         CustomIntent.customType(this, "right-to-left");
     }
 
-    public void logout(View view) {
+    public void logout(View view)
+    {
         Intent intent = new Intent(this, UserLoginActivity.class);
         intent.putExtra("Logout", 0);
         startActivity(intent);
@@ -311,7 +310,8 @@ public class ProductActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
+                if (task.isSuccessful())
+                {
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult()))
                     {
                         Log.d("product from query", document.getId() + " => " + document.getData());
@@ -327,19 +327,22 @@ public class ProductActivity extends AppCompatActivity {
         });
     }
 
-    private void updateCheckBoxNewBottle() {
+    private void updateCheckBoxNewBottle()
+    {
         if (currentProduct.isNewBottle())
         {
             updateNewBottle(true);
         }
     }
 
-    public void goToCart(View view) {
+    public void goToCart(View view)
+    {
         Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
     }
 
-    public void addProductToCart(View view) {
+    public void addProductToCart(View view)
+    {
         if(currentProductLiters == 0)
         {
             Context context = getApplicationContext();
@@ -389,10 +392,12 @@ public class ProductActivity extends AppCompatActivity {
         literSeekBar.setProgress((int) (currentProductLiters * 10));
     }
 
-    public void changeSmell() {
+    public void changeSmell()
+    {
         // get selected radio button from radioGroup
         int selectedId = radioSmellGroup.getCheckedRadioButtonId();
-        switch (selectedId) {
+        switch (selectedId)
+        {
             case R.id.radioButtonRoses:
                 bottleColor = R.style.ColorRoses;
                 currentProduct.setSmell("Roses");

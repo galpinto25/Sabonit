@@ -1,28 +1,25 @@
+/* ********* Imports: ********* */
 package com.example.sabonit;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class OrderActivity extends AppCompatActivity
 {
-
+    /* ********* Functions: ********* */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         runConfirmationGif();
-        new CountDownTimer(4450, 1000) {
+        new CountDownTimer(4450, 1000)
+        {
             public void onTick(long millisUntilFinished) {}
             public void onFinish()
             {
@@ -61,7 +58,8 @@ public class OrderActivity extends AppCompatActivity
                 .into(refillImage);
     }
 
-    public void goToCategories(View view) {
+    public void goToCategories(View view)
+    {
         Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
     }
