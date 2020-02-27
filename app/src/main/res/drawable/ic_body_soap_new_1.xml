@@ -7,7 +7,7 @@
         android:pathData="M119.579,8H199.579C203.822,8 207.892,9.686 210.893,12.686C213.893,15.687 215.579,19.757 215.579,24C215.579,28.243 213.893,32.313 210.893,35.314C207.892,38.314 203.822,40 199.579,40H119.579V8Z"
         android:fillColor="#E0E0E2"/>
     <path
-        android:pathData="M62,450h215v46h-215z"
+        android:pathData="M62,415h215v78h-215z"
         android:fillColor="?attr/bottle_color"/>
 
     <path
