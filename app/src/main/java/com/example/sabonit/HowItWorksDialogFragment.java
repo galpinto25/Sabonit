@@ -2,6 +2,7 @@
 package com.example.sabonit;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import com.bumptech.glide.Glide;
+import com.firebase.ui.auth.data.model.User;
+
 import java.util.Objects;
 
 /**
@@ -71,6 +74,19 @@ public class HowItWorksDialogFragment extends DialogFragment  implements
     {
         if (view.getId() == R.id.got_it_button)
         {
+            Activity callingActivity = getActivity();
+            if (callingActivity != null)
+            {
+                if (callingActivity.getClass() == CategoriesActivity.class)
+                {
+                    CategoriesActivity activity = (CategoriesActivity) callingActivity;
+                    activity.changeInfoButtonToBlack();
+                }
+                else if (callingActivity.getClass() == UserLoginActivity.class) {
+                    UserLoginActivity activity = (UserLoginActivity) callingActivity;
+                    activity.changeInfoButtonsToBlack();
+                }
+            }
             dismiss();
         }
         dismiss();

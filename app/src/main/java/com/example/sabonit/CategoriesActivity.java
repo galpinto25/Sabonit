@@ -4,6 +4,8 @@ package com.example.sabonit;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import maes.tech.intentanim.CustomIntent;
@@ -14,6 +16,10 @@ import maes.tech.intentanim.CustomIntent;
 public class CategoriesActivity extends AppCompatActivity
 {
 
+    /* ********* Attributes: ********* */
+    private ImageView cart;
+    private ImageView info;
+
     /* ********* Functions: ********* */
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,6 +29,10 @@ public class CategoriesActivity extends AppCompatActivity
         // (exist in the xmls), the gray symbol is still clickable like earlier - the user will edit the exit product
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+        cart = findViewById(R.id.cart);
+        info = findViewById(R.id.info);
+        cart.setImageResource(R.drawable.ic_cart);
+        info.setImageResource(R.drawable.ic_info);
     }
 
     @Override
@@ -71,8 +81,28 @@ public class CategoriesActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    /**
+     * Changes the color of the cart button to red.
+     */
     private void changeCartButtonToRed()
-    { //TODO
+    {
+        cart.setImageResource(R.drawable.ic_cart_red);
+    }
+
+    /**
+     * Changes the color of the info button to red.
+     */
+    private void changeInfoButtonToRed()
+    {
+        info.setImageResource(R.drawable.ic_info_red);
+    }
+
+    /**
+     * Changes the color of the info button to black.
+     */
+    void changeInfoButtonToBlack()
+    {
+        info.setImageResource(R.drawable.ic_info);
     }
 
     /**
@@ -93,6 +123,7 @@ public class CategoriesActivity extends AppCompatActivity
         FragmentManager fm = getSupportFragmentManager();
         HowItWorksDialogFragment howItWorksDialogFragment = HowItWorksDialogFragment.newInstance();
         howItWorksDialogFragment.show(fm, "how_it_works");
+        changeInfoButtonToRed();
     }
 
     /**

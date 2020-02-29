@@ -48,6 +48,8 @@ public class UserLoginActivity extends AppCompatActivity
     private Button continueLogin;
     private String name;
     private String uid;
+    private ImageView info;
+    private ImageView howItWorks;
 
     /* ********* Functions: ********* */
     /**
@@ -61,6 +63,8 @@ public class UserLoginActivity extends AppCompatActivity
         defineButtons();
         Bundle bundle = getIntent().getExtras();
         db = FirebaseFirestore.getInstance();
+        info = findViewById(R.id.info);
+        howItWorks = findViewById(R.id.how_it_works_title);
         if (bundle == null)
         {
             createSignInIntent();
@@ -71,6 +75,7 @@ public class UserLoginActivity extends AppCompatActivity
     /**
      * defining the buttons of the function
      */
+    @SuppressLint("SetTextI18n")
     private void defineButtons()
     {
         setContentView(R.layout.activity_user_login);
@@ -273,6 +278,7 @@ public class UserLoginActivity extends AppCompatActivity
         HowItWorksDialogFragment howItWorksDialogFragment = HowItWorksDialogFragment.newInstance();
         // show the relevant message
         howItWorksDialogFragment.show(fm, "how_it_works");
+        changeInfoButtonsToRed();
     }
 
     /**
@@ -316,6 +322,24 @@ public class UserLoginActivity extends AppCompatActivity
     {
         this.finishAffinity();
         System.exit(0);
+    }
+
+    /**
+     * Changes the color of the info and how_it_works buttons to red.
+     */
+    private void changeInfoButtonsToRed()
+    {
+        info.setImageResource(R.drawable.ic_info_red);
+        howItWorks.setImageResource(R.drawable.ic_howit_red);
+    }
+
+    /**
+     * Changes the color of the info and how_it_works buttons to black.
+     */
+    void changeInfoButtonsToBlack()
+    {
+        info.setImageResource(R.drawable.ic_info);
+        howItWorks.setImageResource(R.drawable.ic_howit);
     }
 
 }

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -22,7 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -49,6 +49,7 @@ public class ProductActivity extends AppCompatActivity
     private int bottleColor = R.style.ColorRoses;
     private double oldLitters = 0;
     private String department;
+    private ImageButton backButton;
 
     TextView productName, productDescription, litersTitle, departmentTitle;
     ImageView productImage;
@@ -67,11 +68,13 @@ public class ProductActivity extends AppCompatActivity
         initialProgress = 1;
         defineDepartment();
         defineSeekBar();
+        backButton = findViewById(R.id.back_to_categories);
     }
 
     /**
      * helper function, define department variable
      */
+    @SuppressLint("SetTextI18n")
     private void defineDepartment()
     {
         Bundle bundle = getIntent().getExtras();
@@ -91,11 +94,12 @@ public class ProductActivity extends AppCompatActivity
     {
         literSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
             {
                 double numLiters = progress / 10.0;
-                litersTitle.setText(String.valueOf(numLiters) + "L");
+                litersTitle.setText(numLiters + "L");
                 fillBottle(numLiters, bottleColor);
             }
 
@@ -174,7 +178,6 @@ public class ProductActivity extends AppCompatActivity
      * @param xmls all the bottles fill that possible
      * @param curLitersInSeekBar current liters of the products
      * @param wrapper of the seekbar
-     * @return
      */
     private Drawable fillBottleHelper(int[] xmls, double curLitersInSeekBar, ContextThemeWrapper wrapper)
     {
@@ -250,9 +253,18 @@ public class ProductActivity extends AppCompatActivity
     @Override
     public void onBackPressed()
     {
+        changeBackButtonToRed();
         Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
         CustomIntent.customType(this, "right-to-left");
+    }
+
+    /**
+     * Changes the color of the back button to red.
+     */
+    private void changeBackButtonToRed()
+    {
+        backButton.setBackground(getDrawable(R.drawable.ic_back_red));
     }
 
     /**
@@ -333,7 +345,8 @@ public class ProductActivity extends AppCompatActivity
         Account currentAccount = Account.getCurrentAccount();
         String uid = currentAccount.getUid();
         currentAccount.getCart().addProductToCart(currentProduct, currentProductLiters);
-        db.collection("Accounts").document(uid).update("cart", currentAccount.getCart());
+        db.collection("Accounts").document(uid).update("cart",
+                currentAccount.getCart());
         goToCart(view);
     }
 
@@ -363,7 +376,7 @@ public class ProductActivity extends AppCompatActivity
             currentProductLiters = oldLitters;
         }
         fillBottle(currentProductLiters, bottleColor);
-        litersTitle.setText(String.valueOf(currentProductLiters) + "L");
+        litersTitle.setText(currentProductLiters + "L");
         literSeekBar.setProgress((int) (currentProductLiters * 10));
     }
 

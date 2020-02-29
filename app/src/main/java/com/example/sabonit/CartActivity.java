@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
     private ArrayList<Order> orders;
     private FirebaseFirestore db;
     private Account currentAccount;
+    private ImageButton plusButton;
 
     /* ********* Functions: ********* */
 
@@ -44,6 +46,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
         updateRecyclerView();
         updateCartAdapter();
         db = FirebaseFirestore.getInstance();
+        plusButton = findViewById(R.id.plus_button);
     }
 
     /**
@@ -101,8 +104,17 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
     @Override
     public void onBackPressed()
     {
+        changePlusButtonToRed();
         Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Changes the color of the plus button to red.
+     */
+    private void changePlusButtonToRed()
+    {
+        plusButton.setBackground(getDrawable(R.drawable.ic_plus_red));
     }
 
     /**

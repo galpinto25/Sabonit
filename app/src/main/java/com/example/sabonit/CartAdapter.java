@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -121,10 +120,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public void onClick(View view) {
             if (view.getId() == editButton.getId()) {
                 if (clickListener != null) {
+                    editButton.setImageResource(R.drawable.ic_edit_product_red);
                     clickListener.onProductEditClick(view, getAdapterPosition());
                 }
             } else if (view.getId() == deleteButton.getId()) {
                 if (clickListener != null) {
+                    deleteButton.setImageResource(R.drawable.ic_delete_product_red);
                     clickListener.onProductDeleteClick(view, getAdapterPosition());
                 }
             }

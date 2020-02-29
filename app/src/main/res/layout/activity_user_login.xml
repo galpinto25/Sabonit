@@ -69,7 +69,7 @@
         app:srcCompat="@drawable/ic_info" />
 
     <ImageView
-        android:id="@+id/info2"
+        android:id="@+id/how_it_works_title"
         android:layout_width="141dp"
         android:layout_height="51dp"
         android:layout_marginStart="78dp"
