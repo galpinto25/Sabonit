@@ -4,10 +4,14 @@ package com.example.sabonit;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+
+import java.util.ArrayList;
+
 import maes.tech.intentanim.CustomIntent;
 
 /**
@@ -17,28 +21,64 @@ public class CategoriesActivity extends AppCompatActivity
 {
 
     /* ********* Attributes: ********* */
-    private ImageView cart;
-    private ImageView info;
+    private ImageView cartButton;
+    private ImageView infoButton;
 
     /* ********* Functions: ********* */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        //TODO get current account, from it take the cart, from carts take order list,
-        // if in order list there is product name "laundry" for example. make it gray
-        // (exist in the xmls), the gray symbol is still clickable like earlier - the user will edit the exit product
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
-        cart = findViewById(R.id.cart);
-        info = findViewById(R.id.info);
-        cart.setImageResource(R.drawable.ic_cart);
-        info.setImageResource(R.drawable.ic_info);
+        cartButton = findViewById(R.id.cart);
+        infoButton = findViewById(R.id.info);
+        Account currentAccount = Account.getCurrentAccount();
+        Cart cart = currentAccount.getCart();
+        ArrayList<Order> orders = cart.getOrdersList();
+        updateOrderedDepartments(orders);
     }
 
     @Override
     public void onBackPressed()
     {
         showExitDialog();
+    }
+
+    /**
+     * Updates the departments that the current account ordered from as gray (in order
+     * to indicate to the user that a product was ordered from some department).
+     * @param orders the orders of the current account.
+     */
+    private void updateOrderedDepartments(ArrayList<Order> orders)
+    {
+        for (Order order: orders)
+        {
+            switch (order.getProduct().getDepartment())
+            {
+                case "Laundry":
+                    ImageButton laundry = findViewById(R.id.laundry);
+                    laundry.setImageResource(R.drawable.ic_laundry_gray);
+                    break;
+                case "Hand Soap":
+                    ImageButton handSoap = findViewById(R.id.hand_soap);
+                    handSoap.setImageResource(R.drawable.handsoap_image_gray);
+                    break;
+                case "Dishwashing Liquid":
+                    ImageButton dishwashingLiquid = findViewById(R.id.dishwashing_liquid);
+                    dishwashingLiquid.setImageResource(R.drawable.ic_dish_soap_gray);
+                    break;
+                case "Face & Body Wash":
+                    ImageButton faceBodyWash = findViewById(R.id.face_body_wash);
+                    faceBodyWash.setImageResource(R.drawable.ic_face_body_wash_gray);
+                    break;
+                case "House Cleaning":
+                    ImageButton houseCleaning = findViewById(R.id.house_cleaning);
+                    houseCleaning.setImageResource(R.drawable.ic_house_clean_gray);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     /**
@@ -49,20 +89,20 @@ public class CategoriesActivity extends AppCompatActivity
         Intent intent = new Intent(this, ProductActivity.class);
         switch (view.getId())
         {
-            case R.id.face_body_wash:
-                intent.putExtra("Department", "Face & Body Wash");
+            case R.id.laundry:
+                intent.putExtra("Department", "Laundry");
                 break;
             case R.id.hand_soap:
                 intent.putExtra("Department", "Hand Soap");
                 break;
-            case R.id.house_cleaning:
-                intent.putExtra("Department", "House Cleaning");
-                break;
-            case R.id.laundry:
-                intent.putExtra("Department", "Laundry");
-                break;
             case R.id.dishwashing_liquid:
                 intent.putExtra("Department", "Dishwashing Liquid");
+                break;
+            case R.id.face_body_wash:
+                intent.putExtra("Department", "Face & Body Wash");
+                break;
+            case R.id.house_cleaning:
+                intent.putExtra("Department", "House Cleaning");
                 break;
             default:
                 break;
@@ -86,7 +126,7 @@ public class CategoriesActivity extends AppCompatActivity
      */
     private void changeCartButtonToRed()
     {
-        cart.setImageResource(R.drawable.ic_cart_red);
+        cartButton.setImageResource(R.drawable.ic_cart_red);
     }
 
     /**
@@ -94,7 +134,7 @@ public class CategoriesActivity extends AppCompatActivity
      */
     private void changeInfoButtonToRed()
     {
-        info.setImageResource(R.drawable.ic_info_red);
+        infoButton.setImageResource(R.drawable.ic_info_red);
     }
 
     /**
@@ -102,7 +142,7 @@ public class CategoriesActivity extends AppCompatActivity
      */
     void changeInfoButtonToBlack()
     {
-        info.setImageResource(R.drawable.ic_info);
+        infoButton.setImageResource(R.drawable.ic_info);
     }
 
     /**

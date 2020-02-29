@@ -26,7 +26,6 @@ public class Product
     // Indicates if the user wants CANT_ORDER_EMPTY_CART new bottle or not
     private boolean isNewBottle;
 
-
     /* ********* Constructors: ********* */
     /**
      * Default constructor.

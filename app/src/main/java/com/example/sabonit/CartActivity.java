@@ -17,7 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
 /**
  * This class represents the screen of cart, it contains list of products that user chose.
  * from here user can submit order or add new product or edit exist product.
@@ -50,7 +49,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ItemC
     }
 
     /**
-     * draw itms on screen
+     * draw items on screen
      */
     private void drawScreen()
     {
