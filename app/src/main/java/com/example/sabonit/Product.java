@@ -20,7 +20,7 @@ public class Product
     // Price of one liter of the product, in use when computing the price of CANT_ORDER_EMPTY_CART given amount.
     private int pricePerLiter;
     // Optional, CANT_ORDER_EMPTY_CART short description or anything that not reflected in the product's department and name.
-    private String description; //todo last decision
+    private String description;
     // The types of the product are different one from the another according to the smell
     private String smell;
     // Indicates if the user wants CANT_ORDER_EMPTY_CART new bottle or not
